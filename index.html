@@ -1,121 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shree C. P. Gajjar HighSchool, Jhulasan</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>શ્રી સી.પી.ગજ્જર હાઈસ્કૂલ, ઝુલાસણ</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Header -->
   <header>
-    <h1>Shree C. P. Gajjar HighSchool, Jhulasan</h1>
-    <button class="menu-toggle" onclick="toggleMenu()">Menu</button>
-    <nav id="navbar">
-      <a href="#notices">Notices</a>
-      <a href="#events">Events</a>
-      <a href="#academics">Academics</a>
-      <a href="#faculty">Faculty</a>
-      <a href="#admissions">Admissions</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#committees">Committees</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="topbar">
+      <div class="logo"><img src="D:\School Website\Images\School Logo.png" alt="School Logo" id="school-logo"></div>
+      <div class="school-info">
+        <div class="tagline">|| સત્યમેવ જયતે ||</div>
+        <div class="managed-by">શ્રી ઝુલાસણ કેળવણી મંડળ સંચાલિત</div>
+        <div class="school-name">શ્રી સી.પી.ગજ્જર હાઈસ્કૂલ, ઝુલાસણ</div>
+      </div>
+      <nav class="navbar">
+        <a href="#notices">Notices</a>
+        <a href="#events">Events</a>
+        <a href="#academics">Academics</a>
+        <a href="#faculty">Faculty</a>
+        <a href="#admissions">Admissions</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#committees">Committees</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <section id="hero">
-    <h2>Welcome to Shree C. P. Gajjar HighSchool</h2>
-    <p>Learning for Life. We nurture curious minds through academics, sports, arts, and values.</p>
-    <a href="#admissions" class="btn">Apply Now</a>
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="hero-content">
+      <h1>શ્રી સી.પી.ગજ્જર હાઈસ્કૂલ </h1>
+      <p>અભ્યાસની સાથે સાથે જીવન શિક્ષણ. સાહિત્ય, કલા, વિજ્ઞાન અને મૂલ્યોથી મનનું પોષણ કરવું.</p>
+      <img src="D:\New folder\Images\School Building.png" alt="School Image" class="hero-image">
+    </div>
   </section>
 
-  <section id="notices">
+  <!-- Notice Board -->
+  <section id="notices" class="section">
     <h2>Notice Board</h2>
-    <div class="notice-slider" id="noticeSlider">
-      <div class="card active"><strong>25 Aug 2025</strong><br>Unit Test-2 Timetable (Std 6–10)</div>
-      <div class="card"><strong>18 Aug 2025</strong><br>Janmashtami Celebration Photos</div>
-      <div class="card"><strong>30 Jul 2025</strong><br>Fee Payment Portal Update</div>
+    <div class="grid notices-grid">
+      <!-- Sample Notice -->
+      <div class="notice-card">
+        <div class="notice-date">11 સપ્ટેમ્બર 2025 થી 20 સપ્ટેમ્બર 2025</div>
+        <div class="notice-title">એકમ કસોટી (Std 9–12)</div>
+        <a href="D:\New folder\પ્રવાસ અહેવાલ.pdf" download class="notice-download"> Download the detailed timetable here.</a>
+      </div>
+      <!-- Add more dynamically via JS if needed -->
     </div>
   </section>
 
-  <section id="events">
+  <!-- Events -->
+  <section id="events" class="section">
     <h2>Upcoming Events</h2>
-    <div class="grid">
-      <div class="card">14 Sep 2025 – Teacher–Parent Meeting</div>
-      <div class="card">21 Sep 2025 – Science Exhibition</div>
-      <div class="card">02 Oct 2025 – Gandhi Jayanti (Holiday)</div>
+    <div class="grid events-grid">
+      <div class="event-card">
+        <div class="event-name">તિથિ ભોજન</div>
+        <div class="event-date">10 Sep 2025</div>
+        <div class="event-location">આત્મસંતોષ હૉલ, 11:30 AM</div>
+      </div>
+      <!-- Add more dynamically via JS -->
     </div>
   </section>
 
-  <section id="academics">
+  <!-- Academics -->
+  <section id="academics" class="section">
     <h2>Academics</h2>
-    <p>We follow the GCERT curriculum with a strong focus on inquiry-based learning and holistic development.</p>
-    <div class="grid">
-      <div class="card"><strong>Upper Primary (Std 5–8)</strong><br>Maths, Science, ICT</div>
-      <div class="card"><strong>Secondary (Std 9–10)</strong><br>Maths, Science, SS, English</div>
-    </div>
+    <p>We follow GCERT curriculum with focus on inquiry-based learning and holistic development.</p>
+    <!-- Add streams dynamically -->
   </section>
 
-  <section id="faculty">
+  <!-- Faculty -->
+  <section id="faculty" class="section">
     <h2>Faculty & Staff</h2>
-    <div class="grid">
-      <div class="card">Ambalal Prajapati – Principal</div>
-      <div class="card">Shambhubhai Rabari – Vice Principal</div>
-      <div class="card">Aditya Raval – Maths & Science</div>
-      <div class="card">Hinaben Agrawat – Sports</div>
-      <div class="card">Dimpleben Suthar – Sports</div>
-      <div class="card">Jigishaben  – Sports</div>
-      <div class="card">Meghnaben Patel – Sports</div>
-      <div class="card">Gayatriben Dodiya – Sports</div>
-      <div class="card">Ranjitbhai  – Cleark</div>
-      <div class="card">Jitubhai Sadhu – Computer Instructor</div>
-      <div class="card">Saileshbhai Patel – Peon </div>
+    <div class="grid faculty-grid">
+      <!-- Sample Faculty -->
+      <div class="faculty-card">
+        <img src="Images\Principal.png" alt="Ambalal Prajapati">
+        <div class="faculty-name">Ambalal Prajapati</div>
+        <div class="faculty-role">Principal</div>
+      </div>
+      <div class="faculty-card">
+        <img src="Images\Principal.png" alt="Ambalal Prajapati">
+        <div class="faculty-name">Shambhubhai Rabari</div>
+        <div class="faculty-role">Teacher</div>
+      </div>
+      <div class="faculty-card">
+        <img src="Images\Principal.png" alt="Ambalal Prajapati">
+        <div class="faculty-name">Aditya Raval</div>
+        <div class="faculty-role">Teacher</div>
+      </div>
     </div>
   </section>
 
-  <section id="admissions">
+  <!-- Admissions -->
+  <section id="admissions" class="section">
     <h2>Admissions</h2>
-    <p>Admissions open for 2025–26. Limited seats available.</p>
-    <ol>
-      <li>Fill the application form.</li>
-      <li>Upload required documents.</li>
-      <li>Attend session/exam.</li>
-      <li>Pay fees to confirm seat.</li>
-    </ol>
+    <p>Admissions are open for the academic year 2025–26. Seats are limited.</p>
   </section>
 
-  <section id="gallery">
-    <h2>Gallery</h2>
-    <div class="grid">
-      <div class="card">[Image 1]</div>
-      <div class="card">[Image 2]</div>
-      <div class="card">[Image 3]</div>
-    </div>
-  </section>
+  <!-- Gallery -->
+<section id="gallery" class="section">
+        <h2>Gallery</h2>
+        <p> Snapshots from campus life.</p>
+<div class="gallery-grid">
+    <img src="https://picsum.photos/seed/school1/600/400" alt="Science Exhibition" onclick="openLightbox(this)">
+    <img src="https://picsum.photos/seed/school2/600/400" alt="Sports Day" onclick="openLightbox(this)">
+    <img src="https://picsum.photos/seed/school3/600/400" alt="Cultural Fest" onclick="openLightbox(this)">
+    <img src="https://picsum.photos/seed/school4/600/400" alt="Art & Craft Competition" onclick="openLightbox(this)">
+    <img src="https://picsum.photos/seed/school5/600/400" alt="Ganesh Chaturthi Celebration" onclick="openLightbox(this)">
+    <img src="https://picsum.photos/seed/school6/600/400" alt="Independence Day Assembly" onclick="openLightbox(this)">
+  </div>
 
-  <section id="committees">
-    <h2>Committees</h2>
-    <div class="grid">
-      <div class="card">પ્રાર્થના સમિતિ</div>
-      <div class="card">ગણિત વિજ્ઞાન સમિતિ</div>
-      <div class="card">રમત ગમત સમિતિ</div>
-      <div class="card">બુલેટિન બોર્ડ સમિતિ</div>
-      <div class="card">સાંસ્કૃતિક સમિતિ</div>
-      <div class="card">સફાઈ સમિતિ</div>
-      <div class="card">પ્રવાસ સમિતિ</div>
-      <div class="card">પુસ્તકાલય સમિતિ</div>
-      <div class="card">શિસ્ત સમિતિ</div>
-    </div>
-  </section>
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="if(event.target.id==='lightbox') closeLightbox()">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="Expanded Image">
+    <div id="lightbox-caption"></div>
+  </div>
 
-  <section id="contact">
+  <!-- Committees -->
+  <section id="committees" class="container section">
+  <h2>સમિતિઓ (Committees)</h2>
+  <div class="committees-grid">
+    <a href="committees/prarthna.html" target="_blank" class="committee-card">
+      <h3>🙏 પ્રાર્થના સમિતિ</h3>
+    </a>
+    <a href="committees/ganit-vigyan.html" target="_blank" class="committee-card">
+      <h3>📘 ગણિત વિજ્ઞાન સમિતિ</h3>
+    </a>
+    <a href="committees/khel.html" target="_blank" class="committee-card">
+      <h3>🏆 રમત ગમત સમિતિ</h3>
+    </a>
+    <a href="committees/bulletin.html" target="_blank" class="committee-card">
+      <h3>📜 બુલેટિન બોર્ડ સમિતિ</h3>
+    </a>
+    <a href="committees/sanskrutik.html" target="_blank" class="committee-card">
+      <h3>🎭 સાંસ્કૃતિક સમિતિ</h3>
+    </a>
+    <a href="committees/safai.html" target="_blank" class="committee-card">
+      <h3>🧹 સફાઈ સમિતિ</h3>
+    </a>
+    <a href="committees/pravas.html" target="_blank" class="committee-card">
+      <h3>🚌 પ્રવાસ સમિતિ</h3>
+    </a>
+    <a href="committees/pustakalay.html" target="_blank" class="committee-card">
+      <h3>📚 પુસ્તકાલય સમિતિ</h3>
+    </a>
+    <a href="committees/shist.html" target="_blank" class="committee-card">
+      <h3>⚖️ શિસ્ત સમિતિ</h3>
+    </a>
+  </div>
+</section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
     <h2>Contact Us</h2>
-    <p>📞 +91 97256 43008<br>✉️ cpgajjarhighschool@gmail.com<br>Jhulasan,Kadi,Mehsana,Gujarat</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <form id="contact-form">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="text" id="email_phone" placeholder="Email / Phone" required />
+        <textarea id="message" placeholder="Message" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+        </form>
+<script src="contact.js"></script>
+
+      </div>
+      <div class="contact-card">
+        <p>📞 +919725643008</p>
+        <p>✉️ cpgajjarhighschool@gmail.com</p>
+        <p>📍 Jhulasan, Kadi, Mehsana, Gujarat</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3663.7353244658207!2d72.47059507510149!3d23.32535997896269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c252a828337e9%3A0x98d7819e5b96ecc4!2sC%20P%20High%20School!5e0!3m2!1sen!2sus!4v1757315272878!5m2!1sen!2sus"
+            width="100%" height="200" style="border:0;" allowfullscreen></iframe>
+      </div>
+    </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    © 2025 Shree C. P. Gajjar HighSchool. All rights reserved.
+    <p>© 2025 Shree C. P. Gajjar Highschool, Jhulasan. All rights reserved.</p>
   </footer>
 
+  <!-- JS Script -->
   <script src="script.js"></script>
 </body>
 </html>
