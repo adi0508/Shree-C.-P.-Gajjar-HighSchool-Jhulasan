@@ -209,8 +209,8 @@ header .school-info .school-name {
 /* Committees */
 .committees-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px; /* space between cards */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 50px; /* space between cards */
   margin-top: 20px;
 }
 
@@ -228,7 +228,7 @@ header .school-info .school-name {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 120px; /* fixed height for all cards */
+  height: 100px; /* fixed height for all cards */
 }
 
 .committee-card:hover {
