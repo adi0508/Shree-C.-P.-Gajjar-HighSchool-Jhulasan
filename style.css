@@ -1,4 +1,3 @@
-/* Reset & Base */
 * {
   margin: 0;
   padding: 0;
@@ -6,73 +5,78 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-  background: #f9fafb;
-  color: #111827;
-  line-height: 1.6;
+.site-header {
+  background: #f0fdfa; /* light teal background */
+  border-bottom: 3px solid #0d9488;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-/* Topbar / Header */
-header .topbar {
+.header-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
-  background: #2563eb;
-  color: #fff;
-  padding: 10px 20px;
+  justify-content: center;
+  padding: 15px 20px;
+  gap: 20px;
 }
 
-#school-logo {
-  width: 120px;   /* Adjust width */
-  height: auto;   /* Maintain aspect ratio */
+.header-logo img {
+  height: 90px; /* adjust logo size */
+  width: auto;
 }
 
-header .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  background: #10b981;
-  padding: 10px;
-  border-radius: 10px;
+.header-info {
+  display: flex;
+  flex-direction: column;
+  text-align: center;  /* keeps text aligned neatly */
+  line-height: 1.4;
 }
 
-header .school-info {
-  flex: 1;
-  text-align: center;
-}
-header .school-info .tagline {
-  font-size: 0.9rem;
-  font-style: italic;
-}
-header .school-info .managed-by {
+.tagline {
   font-size: 1rem;
   font-style: italic;
+  color: #2563eb;  /* blue highlight */
+  margin: 0;
 }
 
-header .school-info .school-name {
-  font-size: 1.2rem;
+.managed-by {
+  font-size: 1rem;
+  color: #047857;  /* green */
+  margin: 4px 0;
+}
+
+.school-name {
+  font-size: 1.6rem;
   font-weight: bold;
+  color: #0f172a;
+  margin: 4px 0 0 0;
 }
 
-.navbar a {
-  margin: 0 8px;
+/* Navigation Bar (always below school name) */
+.navbar {
+  background-color: #10b981; /* green accent */
+  padding: 12px 0;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s, border-bottom 0.3s;
   padding: 6px 10px;
-  border-radius: 8px;
-  transition: 0.3s;
 }
 
-.navbar a:hover {
-  background: rgba(255,255,255,0.3);
+.navbar ul li a:hover {
+  color: #12d5ab; /* light green on hover */
+  border-bottom: 2px solid white;
 }
 
 /* Hero Section */
@@ -98,7 +102,7 @@ header .school-info .school-name {
 .hero-section .hero-image {
   margin-top: 20px;
   border-radius: 20px;
-  max-width: 600px;
+  max-width: 250px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
@@ -125,6 +129,7 @@ header .school-info .school-name {
   display: grid;
   gap: 20px;
 }
+
 
 /* Notice Board */
 .notices-grid {
@@ -206,20 +211,23 @@ header .school-info .school-name {
   color: #374151;
 }
 
+
 /* Committees */
 .committees-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 50px; /* space between cards */
+  gap: 70px; /* space between cards */
   margin-top: 20px;
 }
 
 .committee-card {
   background-color: #10b981; /* accent color */
   color: white;
+  text-decoration: none;
   padding: 20px;
   border-radius: 12px;
   text-align: center;
+  font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -234,6 +242,7 @@ header .school-info .school-name {
 .committee-card:hover {
   transform: translateY(-5px) scale(1.03);
   box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+  text-decoration: underline;
 }
 
 
@@ -396,11 +405,16 @@ header .school-info .school-name {
   font-family: 'Georgia', serif;
 }
 
-/* Footer */
-footer {
+.footer-bar {
+  width: 100%;                 /* full width */
+  background-color: #10b981;    /* solid teal bar */
+  color: white;
+  padding: 12px 0;              /* height comes from padding */
   text-align: center;
-  padding: 20px;
-  background: #111827;
-  color: #fff;
-  margin-top: 50px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  position: relative;           /* normal flow (not sticky) */
+  bottom: 0;
+  left: 0;
+  border-top: 4px solid #0f766e;
 }
