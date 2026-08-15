@@ -45,7 +45,8 @@ const eventPhotos = {
             "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.22.42 PM (1).jpeg",
             "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.22.42 PM (2).jpeg",
             "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.22.42 PM.jpeg",
-            "Images/Independence Day Celebration/video.mp4"
+            "Images/Independence Day Celebration/video.mp4",
+            "https://www.youtube.com/embed/hA8MFZ76Jbc"
           ]
     }
 };
@@ -59,18 +60,59 @@ function openEventGallery(eventId) {
     if (!eventData) return;
 
     titleElem.innerText = eventData.title;
-    gridElem.innerHTML = ""; // Clear old images
+    gridElem.innerHTML = ""; // Clear old media
 
-    // Loop through and inject all photos for that day
+    // Loop through and inject photos, local videos, or YouTube embeds
     eventData.photos.forEach(src => {
-        const img = document.createElement("img");
-        img.src = src;
-        img.alt = eventData.title;
-        // Optional: clicking an individual photo opens your main lightbox view
-        img.onclick = function() {
-            openLightbox(img); 
-        };
-        gridElem.appendChild(img);
+        let mediaElement;
+
+        // 1. Check if it's a YouTube link (contains youtube.com or youtu.be)
+        if (src.includes("youtube.com") || src.includes("youtu.be")) {
+            const container = document.createElement("div");
+            container.className = "video-container";
+            
+            // Extract the video ID or convert to nocookie domain with origin parameter
+            let embedUrl = src.replace("youtube.com", "youtube-nocookie.com");
+            if (!embedUrl.includes("origin=")) {
+                const separator = embedUrl.includes("?") ? "&" : "?";
+                embedUrl += `${separator}origin=${encodeURIComponent(window.location.origin)}&enablejsapi=1`;
+            }
+
+            container.innerHTML = `
+                <iframe 
+                    src="${embedUrl}" 
+                    title="${eventData.title}" 
+                    frameborder="0" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            `;
+            gridElem.appendChild(container);
+            return;
+        }
+        
+        // 2. Check if it's a local video file (e.g., .mp4, .webm)
+        else if (src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".mov")) {
+            mediaElement = document.createElement("video");
+            mediaElement.src = src;
+            mediaElement.controls = true;
+            mediaElement.className = "modal-media-item";
+        } 
+        
+        // 3. Otherwise, treat it as a standard image
+        else {
+            mediaElement = document.createElement("img");
+            mediaElement.src = src;
+            mediaElement.alt = eventData.title;
+            mediaElement.className = "modal-media-item";
+            // Clicking an image opens the fullscreen lightbox view
+            mediaElement.onclick = function() {
+                openLightbox(mediaElement); 
+            };
+        }
+
+        gridElem.appendChild(mediaElement);
     });
 
     modal.style.display = "flex";

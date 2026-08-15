@@ -25,14 +25,6 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-    /* --- Your existing mobile rules --- */
-    .container, .page-content {
-        width: 90% !important;
-        margin: 15px auto !important;
-        padding: 15px !important;
-    }
-
-    /* --- Add the new navbar mobile rules here --- */
     .header-container {
         flex-direction: column;
         text-align: center;
@@ -48,21 +40,37 @@ body {
         font-size: 1.2rem !important;
     }
 
+    /* Fix navbar scrolling and ensure items don't disappear */
     .navbar {
+        width: 100%;
         overflow-x: auto;
         white-space: nowrap;
-        padding: 5px 0;
+        -webkit-overflow-scrolling: touch;
+        padding: 8px 0;
+    }
+
+    /* Hide scrollbars cleanly for mobile browsers */
+    .navbar::-webkit-scrollbar {
+        display: none;
     }
 
     .navbar ul {
-        display: inline-flex;
-        padding: 0 10px;
-        gap: 10px;
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        padding: 0 15px;
+        gap: 15px;
+        width: max-content; /* Forces all items (Notices, Events, etc.) to lay out inline without collapsing */
     }
 
-    .navbar li a {
-        font-size: 0.85rem;
-        padding: 6px 10px;
+    .navbar ul li {
+        display: inline-block;
+    }
+
+    .navbar ul li a {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+        display: inline-block;
     }
 }
 .navbar-nav {
@@ -76,6 +84,38 @@ body {
 /* Optional: Hide scrollbars for a cleaner look */
 .navbar-nav::-webkit-scrollbar {
   display: none;
+}
+
+/* Unified styling for images and direct video items in the modal grid */
+.modal-photo-grid img, 
+.modal-photo-grid video {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+.modal-photo-grid video {
+    background: #000; /* Fallback background while video loads */
+}
+
+/* Responsive wrapper container for YouTube iframe embeds inside the modal grid */
+.modal-photo-grid .video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Maintains a clean 16:9 aspect ratio */
+    height: 0;
+    grid-column: span 1; /* Adjust if you want it to span across columns */
+}
+
+.modal-photo-grid .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
 }* 
 {
   margin: 0;
