@@ -1,0 +1,172 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+}
+
+header h1 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+header h2 {
+    margin: 5px 0 0 0;
+    color: #7f8c8d;
+    font-size: 18px;
+}
+
+.search-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    color: #e74c3c;
+    background-color: #fce4e4;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.result-card {
+    background-color: #f9fbfc;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.result-card h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.marks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.marks-table th, .marks-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.marks-table th {
+    background-color: #3498db;
+    color: white;
+}
+
+.final-status {
+    text-align: center;
+    background: #e8f6f3;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #1abc9c;
+}
+
+.final-status h3 {
+    margin: 0 0 5px 0;
+    color: #16a085;
+}
+
+/* Add this rule to style.css */
+.school-logo {
+    width: 80px;      /* Adjust size as needed */
+    height: 80px;     /* Keep equal to width for a circle */
+    object-fit: cover;
+    border-radius: 50%; /* Makes the logo circular (remove if you want a square/rectangle logo) */
+    margin-bottom: 10px;
+    border: 2px solid #3498db;
+}
+
+/* Header Layout */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+}
+
+.header-titles {
+    flex: 1;
+}
+
+header h1 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 22px;
+}
+
+header h2 {
+    margin: 5px 0 0 0;
+    color: #7f8c8d;
+    font-size: 16px;
+}
+
+.school-logo {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #3498db;
+    flex-shrink: 0;
+}
