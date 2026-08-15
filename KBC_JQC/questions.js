@@ -5,7 +5,7 @@ const ROUND_CONFIG = {
     // 3: { name: "Round 3 – ગણિત ગમ્મત", timer: 30, isBuzzer: false },
     // 4: { name: "Round 4 – રેપીડ ફાયર", timer: 10, isBuzzer: false },
     //3: { name: "Round 6 – Audio Challenge", timer: 15, isBuzzer: true },
-    // 99: { name: "⚠️ TIE BREAKER ⚠️", timer: 15, isBuzzer: true, limit: 3}
+    99: { name: "⚠️ TIE BREAKER ⚠️", timer: 15, isBuzzer: true, limit: 3}
 };
 
 const quizQuestions = [
@@ -191,10 +191,10 @@ const quizQuestions = [
     { roundId: 1, question: "ભારતનો રાષ્ટ્રીય જળચર પ્રાણી કયું છે?", options: { A: "ડોલ્ફિન", B: "વ્હેલ", C: "શાર્ક", D: "કાચબા" }, answer: "A", image: null },
 
     { roundId: 1, question: "વિશ્વનો સૌથી વધુ વસ્તી ધરાવતો દેશ કયો છે?", options: { A: "ચીન", B: "ભારત", C: "અમેરિકા", D: "ઇન્ડોનેશિયા" }, answer: "B", image: null },
-    { roundId: 2, question: "ચહેરો ઓળખો", options: { A: "આલ્બર્ટ આઇન્સ્ટાઇન", B: "ગેલેલિયો", C: "બ્રુનો", D: "ન્યૂટન" }, answer: "A", image: "Images/Albert Einstain.jpg" },
-    { roundId: 2, question: "ચહેરો ઓળખો", options: { A: "ડો. હોમી ભાભા", B: "ડો. જયંત નારલીકર", C: "ડો. વિક્રમ સારાભાઇ", D: "ડો. પંકજ જોશી" }, answer: "C", image: "Images/Vikram_Sarabhai.jpg" },
-    { roundId: 2, question: "ચહેરો ઓળખો", options: { A: "ડો. મનમોહન સિંહ", B: "ડો. સલમાન ખાન", C: "રાકેશ કલામ", D: "અબુલ પાકીર જેનુલાબ્દીન અબ્દુલ કલામ" }, answer: "D", image: "Images/Apj.png" },
-    { roundId: 2, question: "ચહેરો ઓળખો", options: { A: "કલ્પના ચાવલા", B: "સુનિતા વિલિયમ્સ", C: "મેડમ ક્યુરી", D: "એનોલા હોમ્સ" }, answer: "B", image: "Images/Sunita Williams.jpg" },
+    { roundId: 1, question: "ચહેરો ઓળખો", options: { A: "આલ્બર્ટ આઇન્સ્ટાઇન", B: "ગેલેલિયો", C: "બ્રુનો", D: "ન્યૂટન" }, answer: "A", image: "Images/Albert Einstain.jpg" },
+    { roundId: 1, question: "ચહેરો ઓળખો", options: { A: "ડો. હોમી ભાભા", B: "ડો. જયંત નારલીકર", C: "ડો. વિક્રમ સારાભાઇ", D: "ડો. પંકજ જોશી" }, answer: "C", image: "Images/Vikram_Sarabhai.jpg" },
+    { roundId: 1, question: "ચહેરો ઓળખો", options: { A: "ડો. મનમોહન સિંહ", B: "ડો. સલમાન ખાન", C: "રાકેશ કલામ", D: "અબુલ પાકીર જેનુલાબ્દીન અબ્દુલ કલામ" }, answer: "D", image: "Images/Apj.png" },
+    { roundId: 1, question: "ચહેરો ઓળખો", options: { A: "કલ્પના ચાવલા", B: "સુનિતા વિલિયમ્સ", C: "મેડમ ક્યુરી", D: "એનોલા હોમ્સ" }, answer: "B", image: "Images/Sunita Williams.jpg" },
 
     // // ROUND 4 (Math)
     { roundId: 1, question: "જવાબ મેળવો: 25 x 4 + 10", options: { A: "100", B: "110", C: "120", D: "150" }, answer: "B", image: null },

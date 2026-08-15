@@ -1,51 +1,55 @@
-console.log("Solar System page loaded");
+console.log("Solar System & Chatbot Engine Loaded! 🚀")
 
-// Generate random stars
-function createStars(count = 150) {
+// 1. Generate Deep Space Stars
+function createStars(count = 200) {
   const starsContainer = document.querySelector('.stars');
+  if (!starsContainer) return;
   for (let i = 0; i < count; i++) {
     const star = document.createElement('span');
     const x = Math.random() * window.innerWidth;
     const y = Math.random() * window.innerHeight;
-    const size = Math.random() * 2 + 1; // 1–3px
-    const delay = Math.random() * 3;    // 0–3s twinkle delay
+    const size = Math.random() * 2 + 1; // 1 to 3px[cite: 20]
+    const delay = Math.random() * 3;    
 
+    star.style.position = 'absolute';
     star.style.left = `${x}px`;
     star.style.top = `${y}px`;
     star.style.width = `${size}px`;
     star.style.height = `${size}px`;
+    star.style.backgroundColor = 'white';
+    star.style.borderRadius = '50%';
+    star.style.animation = `twinkle 3s infinite ease-in-out`;
     star.style.animationDelay = `${delay}s`;
 
     starsContainer.appendChild(star);
   }
 }
 
-/* Tooltip logic so labels stay upright while planets orbit */
+// 2. Dynamic Upright Tooltips for Orbiting Planets
 const tooltip = document.getElementById('tooltip');
 let rafId = null;
 let followEl = null;
 
 function showTooltipFor(el) {
+  if (!tooltip) return;
   followEl = el;
   tooltip.textContent = el.getAttribute('data-name') || '';
   tooltip.style.display = 'block';
   tooltip.setAttribute('aria-hidden', 'false');
-
-  // add glow (uses inline CSS var --glow on element)
   el.classList.add('hovered');
 
   function loop() {
     if (!followEl) return;
     const r = followEl.getBoundingClientRect();
-    const centerX = r.left + r.width/2;
-    const topCandidate = r.top - 8;
+    const centerX = r.left + r.width / 2;
+    const topCandidate = r.top - 12;
     const tooltipW = tooltip.offsetWidth || 70;
     const tooltipH = tooltip.offsetHeight || 24;
 
-    let left = centerX - tooltipW/2;
-    left = Math.max(6, Math.min(left, window.innerWidth - tooltipW - 6));
+    let left = centerX - tooltipW / 2;
+    left = Math.max(10, Math.min(left, window.innerWidth - tooltipW - 10));
     let top = topCandidate - tooltipH;
-    if (top < 6) top = r.bottom + 8;
+    if (top < 10) top = r.bottom + 12;
 
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
@@ -57,6 +61,7 @@ function showTooltipFor(el) {
 }
 
 function hideTooltip() {
+  if (!tooltip) return;
   if (followEl) followEl.classList.remove('hovered');
   followEl = null;
   tooltip.style.display = 'none';
@@ -64,13 +69,15 @@ function hideTooltip() {
   if (rafId) cancelAnimationFrame(rafId);
 }
 
-/* attach event listeners to anything that has data-name */
 document.querySelectorAll('[data-name]').forEach(el => {
   el.addEventListener('mouseenter', () => showTooltipFor(el));
   el.addEventListener('mouseleave', () => hideTooltip());
 });
-// ensure DOM ready
+
+// 3. Rocket Chatbot Controls & Response Engine
 document.addEventListener('DOMContentLoaded', () => {
+  createStars(250); 
+
   const chatbot = document.getElementById('chatbot');
   const chatIcon = document.getElementById('chat-icon');
   const chatBox = document.getElementById('chat-box');
@@ -79,92 +86,82 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatSend = document.getElementById('chat-send');
   const chatMessages = document.getElementById('chat-messages');
 
-  // open chat: add .open to wrapper and set aria
+  if (!chatbot) return;
+
   function openChat() {
     chatbot.classList.add('open');
     chatBox.setAttribute('aria-hidden', 'false');
-    // focus input after short delay so animation completes
-    setTimeout(() => chatInput.focus(), 160);
+    setTimeout(() => chatInput.focus(), 200);
+    
+    if (chatMessages.children.length === 0) {
+        appendMsg('🚀 Guide', "Hello from space! Ask me about any planet.");
+    }
   }
 
   function closeChat() {
     chatbot.classList.remove('open');
     chatBox.setAttribute('aria-hidden', 'true');
-    chatIcon.focus();
   }
 
-  // toggle on rocket click
   chatIcon.addEventListener('click', () => {
-    if (chatbot.classList.contains('open')) closeChat();
-    else openChat();
+    chatbot.classList.contains('open') ? closeChat() : openChat();
   });
 
-  // close button inside chat
   chatClose.addEventListener('click', closeChat);
-
-  // Make sure clicking inside chat doesn't close it (no bubbling)
   chatBox.addEventListener('click', (e) => e.stopPropagation());
 
-  
-//   // send message (append & optional backend call)
-  async function sendMessage() {
+  // Message Handling
+  function sendMessage() {
     const text = chatInput.value.trim();
     if (!text) return;
-    appendMsg('You', escapeHtml(text));
+    
+    appendMsg('👨‍_🚀 You', escapeHtml(text));
     chatInput.value = '';
-    // try backend
-    try {
-      const res = await fetch('http://127.0.0.1:5000/chat', {
-        method: 'POST', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ message: text })
-      });
-      const data = await res.json();
-      appendMsg('Bot', escapeHtml(data.reply || '(no reply)'));
-    } catch (err) {
-      // fallback local answers
-      const fallback = {
-        sun: "Sun — our star.",
-        mercury: "Mercury — the smallest planet.",
-        venus: "Venus — very hot greenhouse.",
-        earth: "Earth — our home.",
-        moon: "Moon — Earth's satellite.",
-        mars: "Mars — red planet.",
-        jupiter: "Jupiter — largest planet.",
-        saturn: "Saturn — the one with rings.",
-        uranus: "Uranus — tilted ice giant.",
-        neptune: "Neptune — distant ice giant."
-      };
-      let reply = "Server not reachable. Ask a planet name like 'Mars'.";
-      for (let k in fallback) if (text.toLowerCase().includes(k)) { reply = fallback[k]; break; }
-      appendMsg('Bot', escapeHtml(reply));
-    }
+
+    // Simulated thinking delay before replying using planetKnowledge
+    setTimeout(() => {
+      const reply = getBotReply(text); 
+      appendMsg('🤖 Bot', escapeHtml(reply));
+    }, 450);
   }
-  // append message DOM
+
   function appendMsg(who, text) {
     const el = document.createElement('div');
-    el.innerHTML = `<strong style="color:#bfefff">${who}:</strong> <span style="margin-left:8px">${text}</span>`;
+    const color = who.includes('You') ? '#fff' : '#00f0ff';
+    el.innerHTML = `<strong style="color:${color}">${who}:</strong> <span style="margin-left:5px">${text}</span>`;
     chatMessages.appendChild(el);
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
-  // click send
   chatSend.addEventListener('click', sendMessage);
-  // enter key
   chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(); });
 
-  // small helper to avoid XSS when echoing user text
   function escapeHtml(unsafe) {
     return unsafe.replace(/[&<>"]/g, (ch) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
   }
-
-  // close chat if user clicks outside (optional)
-  document.addEventListener('click', (e) => {
-    if (!chatbot.contains(e.target) && chatbot.classList.contains('open')) closeChat();
-  });
 });
 
+// 4. Planet Knowledge Search Engine matching your database layout
+function getBotReply(userText) {
+  const lowerInput = userText.toLowerCase();
 
-// Call on load
-document.addEventListener("DOMContentLoaded", () => {
-  createStars(200); // adjust number for density
-});
+  // Ensure planetKnowledge exists globally from questions.js
+  if (typeof planetKnowledge === 'undefined') {
+    return "Knowledge database is loading...";
+  }
+
+  for (let i = 0; i < planetKnowledge.length; i++) {
+    const entry = planetKnowledge[i];
+    const parts = entry.split(':');
+    const keyword = parts[0].trim().toLowerCase();
+    
+    if (lowerInput.includes(keyword)) {
+      return entry;
+    }
+  }
+
+  // Fallback response if defined or default text
+  return typeof fallbackResponse !== 'undefined' 
+    ? fallbackResponse 
+    : "I'm still learning about the cosmos! Try asking me about Mercury, Mars, Earth, or સૌરમંડળ.";
+}
