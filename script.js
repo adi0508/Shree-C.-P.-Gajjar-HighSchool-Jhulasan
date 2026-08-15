@@ -3,7 +3,9 @@ document.querySelectorAll('nav a').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
     const target = document.querySelector(link.getAttribute('href'));
-    target.scrollIntoView({ behavior: 'smooth' });
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+    }
   });
 });
 
@@ -46,8 +48,8 @@ const eventPhotos = {
             "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.22.42 PM (2).jpeg",
             "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.22.42 PM.jpeg",
             "Images/Independence Day Celebration/video.mp4",
-            "https://www.youtube.com/embed/hA8MFZ76Jbc"
-          ]
+            "https://www.youtube.com/embed/M7lc1UVf-VE"
+        ]
     }
 };
 
@@ -60,31 +62,25 @@ function openEventGallery(eventId) {
     if (!eventData) return;
 
     titleElem.innerText = eventData.title;
-    gridElem.innerHTML = ""; // Clear old media
+    gridElem.innerHTML = ""; 
 
-    // Loop through and inject photos, local videos, or YouTube embeds
+    // CRITICAL FIX: Make the modal visible BEFORE injecting the iframe.
+    // YouTube needs the container to have actual dimensions to configure the player.
+    modal.style.display = "flex";
+
     eventData.photos.forEach(src => {
         let mediaElement;
 
-        // 1. Check if it's a YouTube link (contains youtube.com or youtu.be)
-        if (src.includes("youtube.com") || src.includes("youtu.be")) {
+        if (src.includes("youtube.com") || src.includes("youtu.be") || src.includes("youtube-nocookie.com")) {
             const container = document.createElement("div");
             container.className = "video-container";
             
-            // Extract the video ID or convert to nocookie domain with origin parameter
-            let embedUrl = src.replace("youtube.com", "youtube-nocookie.com");
-            if (!embedUrl.includes("origin=")) {
-                const separator = embedUrl.includes("?") ? "&" : "?";
-                embedUrl += `${separator}origin=${encodeURIComponent(window.location.origin)}&enablejsapi=1`;
-            }
-
             container.innerHTML = `
                 <iframe 
-                    src="${embedUrl}" 
+                    src="${src}" 
                     title="${eventData.title}" 
                     frameborder="0" 
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                     allowfullscreen>
                 </iframe>
             `;
@@ -92,7 +88,6 @@ function openEventGallery(eventId) {
             return;
         }
         
-        // 2. Check if it's a local video file (e.g., .mp4, .webm)
         else if (src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".mov")) {
             mediaElement = document.createElement("video");
             mediaElement.src = src;
@@ -100,13 +95,11 @@ function openEventGallery(eventId) {
             mediaElement.className = "modal-media-item";
         } 
         
-        // 3. Otherwise, treat it as a standard image
         else {
             mediaElement = document.createElement("img");
             mediaElement.src = src;
             mediaElement.alt = eventData.title;
             mediaElement.className = "modal-media-item";
-            // Clicking an image opens the fullscreen lightbox view
             mediaElement.onclick = function() {
                 openLightbox(mediaElement); 
             };
@@ -114,15 +107,11 @@ function openEventGallery(eventId) {
 
         gridElem.appendChild(mediaElement);
     });
-
-    modal.style.display = "flex";
 }
-
 function closeEventGallery() {
     document.getElementById("eventModal").style.display = "none";
 }
 
-// Close modal if user clicks outside the content box
 window.onclick = function(event) {
     const modal = document.getElementById("eventModal");
     if (event.target === modal) {
