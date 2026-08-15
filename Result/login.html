@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Portal Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" style="max-width: 400px; margin: 50px auto;">
+        <header>
+            <h1>School Portal</h1>
+            <h2>Secure Login</h2>
+        </header>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <label><strong>Select Standard:</strong></label>
+            <select id="loginStandard" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;">
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+
+            <label><strong>Roll Number:</strong></label>
+            <input type="text" id="loginRoll" placeholder="Enter your roll number" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;">
+
+            <label><strong>Password:</strong></label>
+            <input type="password" id="loginPassword" placeholder="Enter your password" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;">
+
+            <div id="loginError" class="error hidden" style="margin-bottom: 15px;"></div>
+
+            <button type="submit" style="width:100%;">Login to View Result</button>
+        </form>
+        <div style="text-align: center; margin-top: 15px; font-size: 14px; color: #666;">
+            <p>Forgot your password? <br>Please contact your <strong>Class Teacher</strong> or <strong>School Administrator</strong> to reset it.</p>
+        </div>
+    </div>
+
+    
+    <script src="fedb.js"></script>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const std = document.getElementById("loginStandard").value;
+            const roll = document.getElementById("loginRoll").value.trim();
+            const pass = document.getElementById("loginPassword").value.trim();
+            const errDiv = document.getElementById("loginError");
+
+            let db = [];
+            if (std === "9") db = students9th;
+            else if (std === "10") db = students10th;
+            else if (std === "11") db = students11th;
+            else if (std === "12") db = students12th;
+
+            const student = db.find(s => s.rollNo === roll && s.password === pass);
+
+            if (student) {
+                // Save session so index.html knows who is logged in
+                sessionStorage.setItem("authStandard", std);
+                sessionStorage.setItem("authRoll", roll);
+                window.location.href = "fe.html"; // Redirect to your main result page
+            } else {
+                errDiv.innerText = "Invalid Roll Number or Password!";
+                errDiv.classList.remove("hidden");
+            }
+        }
+    </script>
+</body>
+</html>

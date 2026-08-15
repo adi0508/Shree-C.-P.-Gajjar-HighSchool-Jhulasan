@@ -1,3 +1,38 @@
+// Check session authentication on page load
+window.onload = function() {
+    const authStandard = sessionStorage.getItem("authStandard");
+    const authRoll = sessionStorage.getItem("authRoll");
+
+    if (!authStandard || !authRoll) {
+        // If not logged in, force them back to the login page
+        window.location.href = "login.html";
+        return;
+    }
+
+    // Hide manual search inputs so students can't type other roll numbers
+    const searchSection = document.querySelector('.search-section');
+    if (searchSection) {
+        searchSection.style.display = 'none';
+    }
+
+    // Automatically load the logged-in student's result
+    autoLoadStudentResult(authStandard, authRoll);
+};
+
+function autoLoadStudentResult(standard, rollNo) {
+    let activeDatabase = [];
+    let standardLabel = "";
+
+    if (standard === "9") { activeDatabase = students9th; standardLabel = "9th"; }
+    else if (standard === "10") { activeDatabase = students10th; standardLabel = "10th"; }
+    else if (standard === "11") { activeDatabase = students11th; standardLabel = "11th"; }
+    else if (standard === "12") { activeDatabase = students12th; standardLabel = "12th"; }
+
+    const student = activeDatabase.find(s => s.rollNo === rollNo);
+    if (student) {
+        displayResult(student, standardLabel);
+    }
+}
 // script.js
 
 function searchResult() {

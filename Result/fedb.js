@@ -3,6 +3,7 @@
 const students9th = [
     {
         rollNo: "1",
+        password: "pass101",
         name: "દરજી જાનવી વિપુલકુમાર",
         result: "PASS",
         marks: { Gujarati: 66, Hindi: 69, English: 75, Sanskrit: 62, Maths: 42, Science: 56, SocialScience: 55, Computer: "A", PT: "A", Drawing: "B" }

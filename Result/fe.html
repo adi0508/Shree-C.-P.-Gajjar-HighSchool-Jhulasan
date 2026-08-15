@@ -39,6 +39,16 @@
         <div id="errorMessage" class="error hidden"></div>
 
         <div id="resultCard" class="result-card hidden">
+            <!-- Print-Only Official School Header -->
+            <div class="print-header">
+                <img src="LOGO.png" alt="School Logo" class="print-logo">
+                <div class="print-school-titles">
+                    <h2>Shree C. P. Gajjar High School, Jhulasan</h2>
+                    <p>First Exam Result Report (2025-2026)</p>
+                </div>
+                <img src="s2.jpg" alt="Right Logo" class="print-logo">
+            </div>
+
             <center><h3 id="studentName"></h3></center>
             <p><strong>Roll No:</strong> <span id="studentRoll"></span> | <strong>Standard:</strong> <span id="studentGrade"></span></p>
             
@@ -50,27 +60,43 @@
                         <th>Max Marks</th>
                     </tr>
                 </thead>
-                <!-- Give the body an ID so JavaScript can inject rows here -->
                 <tbody id="marksBody">
                 </tbody>
                 <tfoot>
                     <tr>
                         <th>Total</th>
                         <th id="totalMarks"></th>
-                        <!-- Give the max marks an ID so it can update dynamically -->
                         <th id="maxTotalMarks"></th>
                     </tr>
                 </tfoot>
             </table>
+            
             <div class="final-status">
                 <h3>Result: <span id="passFailStatus"></span></h3>
                 <p>Percentage: <span id="percentage"></span>%</p>
             </div>
+
+            <!-- Principal Signature Section (Appears in print) -->
+            <div class="signature-section">
+                <div class="sig-box">
+                    <p>Class Teacher Sign</p>
+                </div>
+                <div class="sig-box">
+                    <p>Principal Signature</p>
+                </div>
+            </div>
+            
+            <!-- Print Button -->
+            <button onclick="window.print()" class="print-btn" style="margin-top: 20px; width: 100%; padding: 12px; background-color: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold;">Print Result Card</button>
+            <button onclick="sessionStorage.clear(); window.location.href='login.html';" style="margin-top: 10px; background-color: #e74c3c; width: 100%;">Logout</button>
+</body>
+        </div>
+    </div>
 			
         </div>
     </div>
 
     <script src="fedb.js"></script>
     <script src="script.js"></script>
-</body>
+    
 </html>
