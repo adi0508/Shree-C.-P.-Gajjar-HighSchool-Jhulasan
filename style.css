@@ -1,4 +1,50 @@
-* {
+/* --- DEFAULT PC / LAPTOP VIEW (Stable & Fluid) --- */
+.container, .page-content {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+}
+
+/* Example: Side-by-side layout for PC */
+.committees-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row on PC */
+    gap: 20px;
+}
+
+
+/* --- MOBILE VIEW (Screens 768px wide or smaller) --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Adjust main containers to prevent horizontal scrolling */
+    .container, .page-content {
+        width: 90% !important;
+        margin: 15px auto !important;
+        padding: 15px !important;
+    }
+
+    /* 2. Stack committee cards in a single column on mobile */
+    .committees-grid {
+        grid-template-columns: 1fr !important; /* 1 card per row */
+        gap: 15px;
+    }
+
+    /* 3. Make header stack vertically instead of side-by-side */
+    .header-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* 4. Scale down large headers so they don't break lines awkwardly */
+    .school-title h1 {
+        font-size: 1.2rem !important;
+    }
+    
+    .committee-header h2 {
+        font-size: 1.6rem !important;
+    }
+}* 
+{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -330,4 +376,84 @@
   font-size: 1.2rem;
   font-weight: 500;
   border-top: 4px solid #0f766e;
+}
+
+/* Event Gallery Card Styling */
+.event-gallery-card {
+    position: relative;
+    cursor: pointer;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+.event-gallery-card:hover {
+    transform: scale(1.03);
+}
+.event-gallery-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+.gallery-card-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* Modal Popup Overlay */
+.event-modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.event-modal-content {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+}
+.modal-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+.modal-photo-grid img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.modal-photo-grid img:hover {
+    opacity: 0.8;
 }

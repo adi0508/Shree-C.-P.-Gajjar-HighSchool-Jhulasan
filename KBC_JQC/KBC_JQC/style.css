@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+
+body { background: radial-gradient(circle, #0f2027, #203a43, #2c5364); color: white; overflow-x: hidden; }
+
+.screen { display: none; min-height: 100vh; padding: 20px; }
+.screen.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.scltitle{color:yellow;font-size: 2rem;text-align: center; }
+/* Intro Setup */
+.logo-text { font-size: 4rem;  margin-bottom: 30px; }
+/* .logo-text { font-size: 4rem; text-shadow: 0 0 20px #00e5ff; margin-bottom: 30px; } */
+.scl-title { font-size: 4rem;color:#f1e20a ; margin-bottom: 30px; }
+/* .team-setup { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 500px; } */
+/* .team-name-input { padding: 12px; border-radius: 8px; border: none; text-align: center; font-size: 1.1rem; font-weight: bold; } */
+/* Intro Screen Container */
+.team-setup { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; /* Centers everything */
+    gap: 12px; 
+    width: 100%; 
+}
+
+/* Unified Width for Inputs and Buttons */
+.team-name-input, 
+.btn-secondary, 
+.btn-primary { 
+    width: 320px;            /* This reduces the length and makes them all equal */
+    padding: 15px;           /* Comfortable height */
+    font-size: 1.1rem; 
+    border-radius: 8px; 
+    text-align: center; 
+    font-weight: bold;
+    border: none;
+    box-sizing: border-box;  /* Critical: includes padding in the width calculation */
+    transition: 0.3s;
+}
+
+/* Specific Style for Inputs */
+.team-name-input {
+    background: white;
+    color: #333;
+    border: 2px solid #00e5ff;
+}
+
+/* Specific Style for the "Add Team" Button */
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px dashed #00e5ff;
+    cursor: pointer;
+    margin-bottom: 10px; /* Space before Start Game */
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 229, 255, 0.2);
+}
+
+/* Specific Style for "Start Game" Button */
+.btn-primary {
+    background: #00e5ff;
+    color: #000;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 229, 255, 0.5);
+}
+
+/* 4. The Buzzer Area & Action Buttons (Matches Header Width) */
+.teacher-controls {
+    width: 95%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#buzzerArea {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-buzzer { 
+    flex: 1; /* Makes buzzers grow to fill the row */
+    max-width: 400px;
+    background: #e74c3c; 
+    color: white; 
+    padding: 25px; 
+    font-size: 1.5rem; 
+    font-weight: 900;
+    border: none; 
+    border-radius: 15px; 
+    cursor: pointer;
+    box-shadow: 0 8px 0 #c0392b;
+    text-transform: uppercase;
+}
+
+.btn-buzzer:active {
+    transform: translateY(4px);
+    box-shadow: 0 4px 0 #c0392b;
+}
+
+/* Make Reveal/Next buttons big as well */
+
+.action-btns .btn-primary {
+    width: 500px; /* Large action button */
+    padding: 25px;
+    font-size: 2rem;
+}
+/* Dynamic Scoreboard Header */
+.game-header { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; padding: 15px; background: rgba(0,0,0,0.4); border-radius: 15px; margin-bottom: 20px; border: 1px solid #00e5ff; }
+.score-container { display: flex; gap: 15px; overflow-x: auto; max-width: 400px; padding: 5px; }
+.score-item { background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 10px; border-left: 4px solid #f1c40f; white-space: nowrap; }
+.score-item.active-turn { border-color: #00e5ff; background: rgba(0,229,255,0.1); box-shadow: 0 0 10px #00e5ff; }
+
+/* Timer */
+.timer-box { font-size: 2.5rem; color: #e74c3c; font-weight: 900; background: #000; padding: 10px 20px; border-radius: 50%; border: 3px solid #e74c3c; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; }
+
+/* Lifelines */
+.lifeline-container { display: flex; justify-content: center;gap: 15px; margin-bottom: 20px; }
+.btn-lifeline { background: #111; color: #f1c40f; border: 2px solid #f1c40f; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+.btn-lifeline:disabled { opacity: 0.2; cursor: not-allowed; }
+.btn-lifeline:hover:not(:disabled) { background: #f1c40f; color: #000; }
+
+/* Question & Options */
+.question-box { display: flex; flex-direction: column; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; background: rgba(0,0,0,0.7); border: 2px solid #00e5ff; padding: 40px; border-radius: 15px; margin-bottom: 20px; }
+#questionImage { max-height: 300px;width: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #fff; }
+
+.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 90%; max-width: 900px; }
+.btn-option { background: linear-gradient(90deg, #141e30, #243b55); border: 2px solid #fff; color: white; padding: 18px 25px; text-align: left; border-radius: 50px; cursor: pointer; font-size: 1.2rem; transition: 0.3s; }
+.opt-letter { color: #f1c40f; font-weight: 900; margin-right: 10px; }
+.btn-option:hover:not(:disabled) { transform: scale(1.02); border-color: #f1c40f; }
+.btn-option.selected { background: #f1c40f !important; color: #000; }
+.btn-option.correct { background: #2ecc71 !important; }
+.btn-option.wrong { background: #e74c3c !important; }
+
+/* Controls */
+.teacher-controls { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+#buzzerArea { display: flex; gap: 10px; }
+.btn-buzzer { background: #e74c3c; color: #fff; padding: 12px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+.btn-primary { background: #00e5ff; color: #000; padding: 15px 40px; border: none; border-radius: 10px; font-weight: 900; cursor: pointer; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(0,229,255,0.3); }
+
+/* Overlay */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 100; backdrop-filter: blur(5px); }
+.modal { background: #111; border: 3px solid #00e5ff; border-radius: 15px; padding: 40px; text-align: center; max-width: 500px; }
+
+/* Poll Bars Animation */
+.poll-row { 
+    display: flex; 
+    align-items: center; 
+    margin: 15px 0; 
+    color: white; 
+}
+
+.poll-label { 
+    width: 30px; 
+    font-weight: 900; 
+    font-size: 1.2rem; 
+}
+
+.poll-bar-container { 
+    flex: 1; 
+    background: #222; 
+    height: 35px; 
+    border-radius: 20px; 
+    overflow: hidden; 
+    margin-left: 10px;
+    border: 1px solid #444;
+}
+
+.poll-bar { 
+    background: linear-gradient(90deg, #f1c40f, #f39c12); 
+    height: 100%; 
+    width: 0%; /* Starts at 0 for animation */
+    color: black; 
+    font-weight: 900; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: width 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67); /* Smooth growth */
+}
+
+/* Modal Styling */
+.modal h2 { 
+    font-size: 2.2rem; 
+    color: #f1c40f; 
+    margin-bottom: 20px; 
+    text-transform: uppercase;
+}
+
+#modalContent p {
+    color: #ddd;
+}
+
+/* Special Styling for Tie Breaker Round Box */
+.round-info h2[innerText*="TIE BREAKER"] {
+    color: #e74c3c !important;
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+
+/* Ensure the winner modal is extra large */
+.modal h1 {
+    font-size: 3.5rem;
+    margin: 20px 0;
+    color: #f1c40f;
+}
+
+/* 1. STABLE CLOCK ANIMATION (No movement, only color/glow) */
+@keyframes timerGlow {
+    0% { color: #ffffff; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+    50% { color: #ff4757; text-shadow: 0 0 20px #ff4757, 0 0 30px #ff4757; }
+    100% { color: #ffffff; text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+}
+
+.timer-box.is-paused #timerDisplay {
+    animation: timerGlow 1.5s infinite ease-in-out;
+}
+
+/* 2. INTENSE STRIKE VISUALS */
+.strike-symbol {
+    color: #ff4757;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-left: 5px;
+    display: inline-block;
+    animation: strikePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-shadow: 0 0 10px rgba(255, 71, 87, 0.8);
+}
+
+@keyframes strikePop {
+    0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Screen Shake for Strike Intensity */
+/* .shake-intense {
+    animation: shakeEffect 0.5s;
+}
+
+@keyframes shakeEffect {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+} */
+
+/* Intense Screen Shake & Flash for Strikes */
+.shake-intense {
+    animation: violentShake 0.6s cubic-bezier(.36,.07,.19,.97) both;
+    background-color: rgba(231, 76, 60, 0.15); /* Flashes the screen red */
+}
+
+@keyframes violentShake {
+    10%, 90% { transform: translate3d(-15px, 0, 0) rotate(-2deg); }
+    20%, 80% { transform: translate3d(25px, 0, 0) rotate(2deg); background-color: rgba(231, 76, 60, 0.3); }
+    30%, 50%, 70% { transform: translate3d(-35px, 0, 0) rotate(-4deg); }
+    40%, 60% { transform: translate3d(35px, 0, 0) rotate(4deg); background-color: rgba(231, 76, 60, 0.5); }
+}
+
+/* Strike Symbol Visibility */
+.strike-symbol {
+    font-size: 1.2rem;
+    animation: strikePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Tie-Breaker Theme - Deep Red Gradient */
+body.tie-breaker-mode {
+    background: radial-gradient(circle, #4b0000, #2a0000, #000000) !important;
+    transition: background 1s ease-in-out;
+}
+
+/* Optional: Make the question box glow red during tie breakers */
+body.tie-breaker-mode .question-card {
+    border: 2px solid #ff4757;
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
+}

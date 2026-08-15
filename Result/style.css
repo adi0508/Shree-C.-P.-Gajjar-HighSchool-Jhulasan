@@ -1,4 +1,8 @@
 /* --- Base & Reset Styles --- */
+body {
+    display: none; /* Hide page instantly on load */
+}
+
 * {
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

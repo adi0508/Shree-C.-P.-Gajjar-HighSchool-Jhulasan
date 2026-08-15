@@ -8,6 +8,11 @@ window.onload = function() {
         window.location.href = "login.html";
         return;
     }
+    // User is authenticated! Now reveal the hidden container smoothly
+    const pageContainer = document.getElementById("pageContainer");
+    if (pageContainer) {
+        pageContainer.style.display = "block";
+    }
 
     // Hide manual search inputs so students can't type other roll numbers
     const searchSection = document.querySelector('.search-section');

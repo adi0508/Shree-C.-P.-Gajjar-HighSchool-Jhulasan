@@ -1,0 +1,11 @@
+The Jhulasan Quiz Competition: Code of Conduct
+
+The Buzzer is Law: In Round 1 and Tie-Breakers, the first team to trigger the buzzer owns the question.
+
+Silence is Golden: During turn-based rounds, only the active team may speak. Any "help" from the audience or other teams will result in a 50-point penalty.
+
+No VAR Refills: Once a lifeline is used, it is gone. Use them for the hard questions, not the easy ones!
+
+The Red Zone: During a Tie-Breaker, three strikes (wrong answers) result in immediate disqualification.
+
+Respect the Game Master: The teacher’s decision is final. In the event of a technical glitch, the Game Master will provide a "Toss-Up" question.
