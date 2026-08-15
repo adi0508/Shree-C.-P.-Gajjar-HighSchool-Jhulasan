@@ -45,6 +45,7 @@ const eventPhotos = {
             "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.22.42 PM (1).jpeg",
             "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.22.42 PM (2).jpeg",
             "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.22.42 PM.jpeg",
+            "Images/Independence Day Celebration/video.mp4"
           ]
     }
 };

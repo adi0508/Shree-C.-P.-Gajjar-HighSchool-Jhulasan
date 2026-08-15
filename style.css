@@ -11,7 +11,18 @@
     grid-template-columns: repeat(3, 1fr); /* 3 cards per row on PC */
     gap: 20px;
 }
+.navbar {
+  position: fixed; /* Keeps the navbar locked to the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensures it stays on top of other elements */
+  background-color: #ffffff; /* Add a solid background so content doesn't bleed through */
+}
 
+body {
+  padding-top: 60px; /* Adjust this value to match the exact height of your navbar */
+}
 
 @media screen and (max-width: 768px) {
     /* --- Your existing mobile rules --- */
@@ -53,6 +64,18 @@
         font-size: 0.85rem;
         padding: 6px 10px;
     }
+}
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Optional: Hide scrollbars for a cleaner look */
+.navbar-nav::-webkit-scrollbar {
+  display: none;
 }* 
 {
   margin: 0;
