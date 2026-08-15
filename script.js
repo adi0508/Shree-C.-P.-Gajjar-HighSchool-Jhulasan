@@ -37,7 +37,7 @@ const eventPhotos = {
         photos: [
             "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.20.15 PM.jpeg",
             "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.20.15 PM (1).jpeg",
-            "Images/Independence Day Celebration/video.mp4",
+            "Images/Independence Day Celebration/Video.mp4",
             "https://www.youtube.com/embed/hA8MFZ76Jbc"
         ]
     }
