@@ -13,35 +13,45 @@
 }
 
 
-/* --- MOBILE VIEW (Screens 768px wide or smaller) --- */
 @media screen and (max-width: 768px) {
-    
-    /* 1. Adjust main containers to prevent horizontal scrolling */
+    /* --- Your existing mobile rules --- */
     .container, .page-content {
         width: 90% !important;
         margin: 15px auto !important;
         padding: 15px !important;
     }
 
-    /* 2. Stack committee cards in a single column on mobile */
-    .committees-grid {
-        grid-template-columns: 1fr !important; /* 1 card per row */
-        gap: 15px;
-    }
-
-    /* 3. Make header stack vertically instead of side-by-side */
-    .header-flex {
+    /* --- Add the new navbar mobile rules here --- */
+    .header-container {
         flex-direction: column;
         text-align: center;
+        gap: 10px;
     }
 
-    /* 4. Scale down large headers so they don't break lines awkwardly */
-    .school-title h1 {
+    .header-logo img {
+        width: 65px;
+        height: auto;
+    }
+
+    .header-info .school-name {
         font-size: 1.2rem !important;
     }
-    
-    .committee-header h2 {
-        font-size: 1.6rem !important;
+
+    .navbar {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 5px 0;
+    }
+
+    .navbar ul {
+        display: inline-flex;
+        padding: 0 10px;
+        gap: 10px;
+    }
+
+    .navbar li a {
+        font-size: 0.85rem;
+        padding: 6px 10px;
     }
 }* 
 {
