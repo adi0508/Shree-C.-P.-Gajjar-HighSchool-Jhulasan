@@ -26,7 +26,15 @@
             <input type="text" id="loginRoll" placeholder="Enter your roll number" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;">
 
             <label><strong>Password:</strong></label>
-            <input type="password" id="loginPassword" placeholder="Enter your password" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;">
+            <div style="position: relative; margin-bottom: 15px;">
+                <input type="password" id="loginPassword" placeholder="Enter your password" required style="width:100%; padding:12px; padding-right: 40px; border:1px solid #ccc; border-radius:5px; box-sizing: border-box;">
+                
+                <!-- Eye Button to Toggle Password Visibility -->
+                <span onclick="togglePassword()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px; user-select: none;" title="Show/Hide Password">
+                    👁️
+                </span>
+            </div>
+            <!-- <input type="password" id="loginPassword" placeholder="Enter your password" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;"> -->
 
             <div id="loginError" class="error hidden" style="margin-bottom: 15px;"></div>
 
@@ -40,6 +48,14 @@
     
     <script src="fedb.js"></script>
     <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById("loginPassword");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+            }
+        }
         function handleLogin(event) {
             event.preventDefault();
             const std = document.getElementById("loginStandard").value;
