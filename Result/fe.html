@@ -86,17 +86,15 @@
                 </div>
             </div>
             
-            <!-- Print Button -->
+         <!-- Print Button -->
             <button onclick="window.print()" class="print-btn" style="margin-top: 20px; width: 100%; padding: 12px; background-color: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold;">Print Result Card</button>
-            <button onclick="sessionStorage.clear(); window.location.href='login.html';" style="margin-top: 10px; background-color: #e74c3c; width: 100%;">Logout</button>
-</body>
-        </div>
-    </div>
-			
+            
+            <!-- Logout Button with explicit class for print hiding -->
+            <button onclick="sessionStorage.clear(); window.location.href='login.html';" class="logout-btn" style="margin-top: 10px; background-color: #e74c3c; width: 100%;">Logout</button>
         </div>
     </div>
 
     <script src="fedb.js"></script>
     <script src="script.js"></script>
-    
+</body>
 </html>
