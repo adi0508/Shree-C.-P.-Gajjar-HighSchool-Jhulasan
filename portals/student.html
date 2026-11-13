@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portal | Shree C. P. Gajjar Highschool</title>
+  <link rel="stylesheet" href="portal.css">
+  <style>
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0d9488, #10b981);
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+    .id-card-box {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 440px;
+      border-top: 5px solid #14b8a6;
+      box-shadow: 0 15px 30px rgba(15, 23, 42, 0.15);
+    }
+    @media print {
+      .sidebar, .topbar, .no-print { display: none !important; }
+      .main-area { padding: 0; }
+      .panel-card { box-shadow: none; border: 1px solid #cbd5e1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="../Images/School Logo.png" alt="Logo">
+        <div>
+          <h3>Student Portal</h3>
+          <small style="color: #5eead4;" id="sidebarRoll">Roll No.</small>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li><button class="active" onclick="switchTab('results', this)">🎓 Exam Results & Report</button></li>
+        <li><button onclick="switchTab('attendance', this)">📅 Month-Wise Attendance</button></li>
+        <li><button onclick="switchTab('homework', this)">📚 Homework & Notes</button></li>
+        <li><button onclick="switchTab('notices', this)">📢 Notices & Timetable</button></li>
+        <li><button onclick="switchTab('profile', this)">🪪 Student ID Profile</button></li>
+      </ul>
+
+      <button onclick="logoutUser()" style="margin-top: 20px; padding: 10px; border: none; border-radius: 8px; background: #ef4444; color: white; font-weight: 700; cursor: pointer;">🚪 Logout</button>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="main-area">
+      <div class="topbar">
+        <div>
+          <h2 style="font-size: 1.3rem;">Welcome, <span id="studentName">Student</span></h2>
+          <small style="color: #64748b;" id="studentMeta">Shree C. P. Gajjar Highschool, Jhulasan</small>
+        </div>
+        <a href="../index.html" target="_blank" style="text-decoration: none; background: #f0fdfa; color: #0d9488; padding: 8px 14px; border-radius: 8px; font-weight: 700; border: 1px solid #0d9488;">🌐 Main Website</a>
+      </div>
+
+      <!-- Quick Top Summary Cards -->
+      <div class="stats-grid no-print">
+        <div class="stat-card">
+          <h4>Overall Attendance</h4>
+          <div class="stat-value" id="topAttPct">0.0%</div>
+          <small id="topAttDays" style="color: #10b981; font-weight: 600;">0 Days Present</small>
+        </div>
+        <div class="stat-card" style="border-left-color: #2563eb;">
+          <h4>Published Exam Results</h4>
+          <div class="stat-value" id="topExamCount">0</div>
+          <small style="color: #64748b;">Verified by Principal</small>
+        </div>
+        <div class="stat-card" style="border-left-color: #f59e0b;">
+          <h4>Active Assignments</h4>
+          <div class="stat-value" id="topHwCount">0</div>
+          <small style="color: #64748b;">For your class</small>
+        </div>
+      </div>
+
+      <!-- TAB 1: DIGITAL REPORT CARD & EXAM RESULTS -->
+      <section id="tab-results" class="tab-section active">
+        <div class="panel-card">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 18px;">
+            <div>
+              <h3 style="font-size: 1.25rem; color: #0f172a;">🎓 Official Exam Marksheet</h3>
+              <small style="color: #64748b;">Only marks approved and published by the Principal are displayed here.</small>
+            </div>
+            <button type="button" class="action-btn btn-neutral no-print" onclick="window.print()" style="padding: 8px 14px;">🖨️ Print Report Card</button>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Exam Name</th>
+                  <th>Subject</th>
+                  <th>Teacher</th>
+                  <th>Marks Obtained</th>
+                  <th>Max Marks</th>
+                  <th>Percentage</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody id="studentResultsBody"></tbody>
+            </table>
+          </div>
+
+          <!-- Visual Subject Performance Bars -->
+          <div id="subjectPerformanceBars" style="margin-top: 24px;"></div>
+        </div>
+      </section>
+
+      <!-- TAB 2: MONTH-WISE ATTENDANCE -->
+      <section id="tab-attendance" class="tab-section">
+        <div class="panel-card">
+          <h3 class="panel-title">📅 Month-Wise Attendance Breakdown</h3>
+          <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 20px;">Review your monthly attendance records entered by your teachers.</p>
+
+          <div style="overflow-x: auto; margin-bottom: 24px;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Working Days</th>
+                  <th>Present Days</th>
+                  <th>Monthly Percentage</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="studentMonthlyAttendanceBody"></tbody>
+            </table>
+          </div>
+
+          <div style="background: #f8fafc; padding: 18px; border-radius: 12px; border: 1px solid #e2e8f0;">
+            <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.92rem;">
+              <span>Minimum Required Attendance: 80%</span>
+              <span id="attStatusLabel" style="color: #10b981;">✔ Eligible for Exams</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="attProgressFill" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: HOMEWORK & STUDY MATERIAL -->
+      <section id="tab-homework" class="tab-section">
+        <div class="panel-card">
+          <h3 class="panel-title">📚 Class Homework & Study Notes</h3>
+          <div id="studentHomeworkContainer"></div>
+        </div>
+      </section>
+
+      <!-- TAB 4: NOTICES & EXAM TIMETABLE -->
+      <section id="tab-notices" class="tab-section">
+        <div class="panel-card">
+          <h3 class="panel-title">📢 School Circulars & Notices</h3>
+          <div id="studentNoticesContainer"></div>
+        </div>
+
+        <div class="panel-card">
+          <h3 class="panel-title">🗓️ Upcoming Exam Schedule</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Exam</th>
+                <th>Time</th>
+                <th>Venue</th>
+                <th>Instructions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Second Term Examination</strong></td>
+                <td>11:00 AM - 02:00 PM</td>
+                <td>Main School Building</td>
+                <td>Bring School ID Card and exam receipt.</td>
+              </tr>
+              <tr>
+                <td><strong>Science Practical & Viva</strong></td>
+                <td>08:30 AM - 11:00 AM</td>
+                <td>Science Laboratory</td>
+                <td>Submit certified journal before exam day.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 5: DIGITAL STUDENT ID PROFILE -->
+      <section id="tab-profile" class="tab-section">
+        <div class="panel-card">
+          <h3 class="panel-title">🪪 Digital Student Identity Card</h3>
+          <div class="id-card-box">
+            <div style="display: flex; align-items: center; gap: 14px; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 14px; margin-bottom: 16px;">
+              <img src="../Images/School Logo.png" alt="Logo" style="width: 52px; height: 52px; background: white; border-radius: 10px; padding: 4px; object-fit: contain;">
+              <div>
+                <div style="font-size: 0.78rem; color: #5eead4; font-weight: 700;">SHREE JHULASAN KELVANI MANDAL</div>
+                <div style="font-size: 1.05rem; font-weight: 800;">Shree C. P. Gajjar Highschool</div>
+              </div>
+            </div>
+            <div style="display: grid; gap: 8px; font-size: 0.95rem;">
+              <div><span style="color: #94a3b8;">Student Name:</span> <strong id="idCardName">Patel Aarav R.</strong></div>
+              <div><span style="color: #94a3b8;">Roll Number:</span> <strong id="idCardRoll">101</strong></div>
+              <div><span style="color: #94a3b8;">Standard / Class:</span> <strong id="idCardStd">Std 10-A</strong></div>
+              <div><span style="color: #94a3b8;">Academic Year:</span> <strong>2026 - 2027</strong></div>
+              <div><span style="color: #94a3b8;">Campus:</span> <strong>Jhulasan, Ta. Kadi, Dist. Mehsana</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="portal-data.js"></script>
+  <script>
+    const activeStudent = getCurrentUser();
+    if (!activeStudent || activeStudent.role !== "student") {
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("studentName").innerText = activeStudent.name;
+      document.getElementById("sidebarRoll").innerText = `Roll No: ${activeStudent.roll || activeStudent.id}`;
+      document.getElementById("studentMeta").innerText = `${activeStudent.std || "Std 10-A"} • Roll No. ${activeStudent.roll || activeStudent.id}`;
+      document.getElementById("idCardName").innerText = activeStudent.name;
+      document.getElementById("idCardRoll").innerText = activeStudent.roll || activeStudent.id;
+      document.getElementById("idCardStd").innerText = activeStudent.std || "Std 10-A";
+    }
+
+    function switchTab(tabName, btn) {
+      document.querySelectorAll(".tab-section").forEach(sec => sec.classList.remove("active"));
+      document.querySelectorAll(".sidebar-nav button").forEach(b => b.classList.remove("active"));
+      document.getElementById("tab-" + tabName).classList.add("active");
+      btn.classList.add("active");
+    }
+
+    function calculateGrade(pct) {
+      if (pct >= 90) return "A1";
+      if (pct >= 80) return "A2";
+      if (pct >= 70) return "B1";
+      if (pct >= 60) return "B2";
+      if (pct >= 50) return "C1";
+      if (pct >= 35) return "C2 (Pass)";
+      return "E (Needs Improvement)";
+    }
+
+    function renderStudentPortal() {
+      const db = getSchoolData();
+      const myRoll = String(activeStudent.roll || activeStudent.id).trim();
+      const myStd = activeStudent.std || "Std 10-A";
+
+      // 1. Published Exam Results
+      const publishedExams = db.examUploads.filter(ex => ex.status === "Published");
+      const myMarksList = [];
+
+      publishedExams.forEach(ex => {
+        const studentRow = ex.records.find(r => String(r.roll).trim() === myRoll);
+        if (studentRow) {
+          myMarksList.push({
+            examName: ex.examName,
+            subject: ex.subject,
+            teacher: ex.teacherName,
+            marks: Number(studentRow.marks),
+            maxMarks: Number(studentRow.maxMarks)
+          });
+        }
+      });
+
+      document.getElementById("topExamCount").innerText = myMarksList.length;
+
+      const resultsBody = document.getElementById("studentResultsBody");
+      const barsContainer = document.getElementById("subjectPerformanceBars");
+
+      if (myMarksList.length > 0) {
+        resultsBody.innerHTML = myMarksList.map(m => {
+          const pct = ((m.marks / m.maxMarks) * 100).toFixed(1);
+          const grade = calculateGrade(Number(pct));
+          return `
+            <tr>
+              <td><strong>${m.examName}</strong></td>
+              <td>${m.subject}</td>
+              <td>${m.teacher}</td>
+              <td><strong>${m.marks}</strong></td>
+              <td>${m.maxMarks}</td>
+              <td><strong>${pct}%</strong></td>
+              <td><span class="status-pill ${pct >= 35 ? 'status-approved' : 'status-rejected'}">${grade}</span></td>
+            </tr>
+          `;
+        }).join("");
+
+        barsContainer.innerHTML = `<h4 style="margin-bottom: 12px; color: #0f172a;">📊 Visual Subject Performance</h4>` + myMarksList.map(m => {
+          const pct = ((m.marks / m.maxMarks) * 100).toFixed(1);
+          return `
+            <div style="margin-bottom: 14px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600;">
+                <span>${m.subject} (${m.examName})</span>
+                <span>${m.marks} / ${m.maxMarks} (${pct}%)</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width: ${pct}%;"></div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      } else {
+        resultsBody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#64748b; padding: 20px;">No published results available yet. Once your teacher uploads Excel marks and the Principal approves them, they will appear here.</td></tr>`;
+        barsContainer.innerHTML = "";
+      }
+
+      // 2. Month-Wise Attendance Records for this Student
+      const allAtt = db.attendanceRecords || [];
+      const myMonthlyAtt = allAtt.filter(a => String(a.roll).trim() === myRoll);
+
+      let totalWorkingAll = 0;
+      let totalPresentAll = 0;
+
+      const monthlyTableBody = document.getElementById("studentMonthlyAttendanceBody");
+      if (myMonthlyAtt.length > 0) {
+        monthlyTableBody.innerHTML = myMonthlyAtt.map(a => {
+          totalWorkingAll += Number(a.totalDays);
+          totalPresentAll += Number(a.presentDays);
+          const mPct = ((a.presentDays / a.totalDays) * 100).toFixed(1);
+          const isGood = mPct >= 80;
+          return `
+            <tr>
+              <td><strong>${a.month}</strong></td>
+              <td>${a.totalDays}</td>
+              <td>${a.presentDays}</td>
+              <td><strong>${mPct}%</strong></td>
+              <td><span class="status-pill ${isGood ? 'status-approved' : 'status-rejected'}">${isGood ? 'Good' : 'Low'}</span></td>
+            </tr>
+          `;
+        }).join("");
+      } else {
+        monthlyTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#64748b;">No monthly attendance records found for your roll number.</td></tr>`;
+      }
+
+      // Compute Overall Cumulative Attendance
+      const overallPct = totalWorkingAll > 0 ? ((totalPresentAll / totalWorkingAll) * 100).toFixed(1) : "0.0";
+      document.getElementById("topAttPct").innerText = `${overallPct}%`;
+      document.getElementById("topAttDays").innerText = `${totalPresentAll} / ${totalWorkingAll} Days Present`;
+      document.getElementById("attProgressFill").style.width = `${Math.min(100, overallPct)}%`;
+
+      const statusLabel = document.getElementById("attStatusLabel");
+      if (Number(overallPct) >= 80 || totalWorkingAll === 0) {
+        statusLabel.innerText = "✔ Eligible for Exams";
+        statusLabel.style.color = "#10b981";
+      } else {
+        statusLabel.innerText = "⚠️ Low Attendance Warning (Below 80%)";
+        statusLabel.style.color = "#ef4444";
+      }
+
+      // 3. Homework for Student's Standard
+      const allHw = db.homeworks || [];
+      const myHw = allHw.filter(h => h.std === myStd);
+      document.getElementById("topHwCount").innerText = myHw.length;
+
+      const hwContainer = document.getElementById("studentHomeworkContainer");
+      hwContainer.innerHTML = myHw.length ? myHw.map(h => `
+        <div style="padding: 16px; border-left: 4px solid #2563eb; background: #f8fafc; border-radius: 8px; margin-bottom: 12px;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;">
+            <strong>${h.subject}: ${h.title}</strong>
+            <span class="status-pill status-pending">Due Date: ${h.dueDate}</span>
+          </div>
+          <p style="margin-top: 8px; font-size: 0.94rem; color: #334155;">${h.desc}</p>
+          <small style="color: #64748b; display: block; margin-top: 6px;">Assigned by: ${h.teacherName}</small>
+        </div>
+      `).join("") : `<p style="color:#64748b;">No pending homework assigned for ${myStd}.</p>`;
+
+      // 4. Student & Parent Notices
+      const studentNotices = db.notices.filter(n => n.audience !== "Teachers Only");
+      document.getElementById("studentNoticesContainer").innerHTML = studentNotices.map(n => `
+        <div style="padding: 15px; border-left: 4px solid #0d9488; background: #f8fafc; border-radius: 8px; margin-bottom: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong>${n.title}</strong>
+            <small style="color: #64748b;">${n.date}</small>
+          </div>
+          <p style="margin-top: 6px; font-size: 0.94rem; color: #334155;">${n.content}</p>
+        </div>
+      `).join("");
+    }
+
+    renderStudentPortal();
+  </script>
+</body>
+</html>

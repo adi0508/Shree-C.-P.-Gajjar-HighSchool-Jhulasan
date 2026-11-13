@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Portal | Shree C. P. Gajjar Highschool</title>
+  <link rel="stylesheet" href="portal.css">
+  <!-- SheetJS CDN for reading & generating Excel (.xlsx / .csv) files -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="../Images/School Logo.png" alt="Logo">
+        <div>
+          <h3>Faculty Portal</h3>
+          <small style="color: #5eead4;" id="sidebarSubject">Teacher</small>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li><button class="active" onclick="switchTab('marks', this)">📊 Upload Excel Marks</button></li>
+        <li><button onclick="switchTab('attendance', this)">📋 Month-Wise Attendance</button></li>
+        <li><button onclick="switchTab('homework', this)">📚 Homework & Notes</button></li>
+        <li><button onclick="switchTab('leaves', this)">🗓️ Apply for Leave</button></li>
+        <li><button onclick="switchTab('notices', this)">📢 Staff Notices & Schedule</button></li>
+      </ul>
+
+      <button onclick="logoutUser()" style="margin-top: 20px; padding: 10px; border: none; border-radius: 8px; background: #ef4444; color: white; font-weight: 700; cursor: pointer;">🚪 Logout</button>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="main-area">
+      <div class="topbar">
+        <div>
+          <h2 style="font-size: 1.3rem;">Welcome, <span id="teacherName">Teacher</span></h2>
+          <small style="color: #64748b;" id="teacherMeta">Shree C. P. Gajjar Highschool, Jhulasan</small>
+        </div>
+        <a href="../index.html" target="_blank" style="text-decoration: none; background: #f0fdfa; color: #0d9488; padding: 8px 14px; border-radius: 8px; font-weight: 700; border: 1px solid #0d9488;">🌐 Main Website</a>
+      </div>
+
+      <!-- TAB 1: EXCEL MARKS UPLOADER -->
+      <section id="tab-marks" class="tab-section active">
+        <div class="panel-card">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 18px;">
+            <h3 style="font-size: 1.25rem; color: #0f172a;">📊 Upload Student Exam Marks (Excel / CSV)</h3>
+            <button type="button" class="action-btn btn-neutral" onclick="downloadSampleExcel()" style="padding: 8px 14px;">📥 Download Sample Excel Template</button>
+          </div>
+
+          <form id="excelUploadForm" onsubmit="submitExamMarks(event)">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 16px;">
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600;">Standard / Class</label>
+                <select id="examStd" class="form-control" required>
+                  <option value="Std 9-A">Std 9-A</option>
+                  <option value="Std 10-A" selected>Std 10-A</option>
+                  <option value="Std 11-Arts">Std 11-Arts</option>
+                  <option value="Std 11-Com">Std 11-Com</option>
+                  <option value="Std 12-Arts">Std 12-Arts</option>
+                  <option value="Std 12-Com">Std 12-Com</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600;">Subject</label>
+                <input type="text" id="examSubject" class="form-control" placeholder="e.g., Science" required>
+              </div>
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600;">Exam Name</label>
+                <select id="examName" class="form-control" required>
+                  <option value="Unit Test 1">Unit Test 1</option>
+                  <option value="Unit Test 2">Unit Test 2</option>
+                  <option value="First Exam">First Exam</option>
+                  <option value="Second Exam">Second Exam</option>
+                  <option value="Annual Exam">Annual Exam</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600;">Select Excel File (.xlsx / .csv)</label>
+                <input type="file" id="excelFileInput" class="form-control" accept=".xlsx, .xls, .csv" onchange="handleExcelFile(event)" required>
+              </div>
+            </div>
+
+            <!-- Parsed Excel Preview Table -->
+            <div id="excelPreviewBox" style="display: none; margin-top: 18px; background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px solid #cbd5e1;">
+              <h4 style="margin-bottom: 10px; color: #0f172a;">✅ Preview Parsed Student Marks (<span id="parsedCount">0</span> Students)</h4>
+              <div style="overflow-x: auto; max-height: 260px;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Roll No.</th>
+                      <th>Student Name</th>
+                      <th>Marks Obtained</th>
+                      <th>Max Marks</th>
+                      <th>Percentage</th>
+                    </tr>
+                  </thead>
+                  <tbody id="excelPreviewBody"></tbody>
+                </table>
+              </div>
+              <button type="submit" class="btn-block" style="max-width: 280px; margin-top: 15px;">🚀 Submit Marks to Principal</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel-card">
+          <h3 class="panel-title">📁 Your Uploaded Marksheets</h3>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Standard</th>
+                  <th>Subject</th>
+                  <th>Exam</th>
+                  <th>Students</th>
+                  <th>Approval Status</th>
+                </tr>
+              </thead>
+              <tbody id="teacherUploadsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: MONTH-WISE ATTENDANCE -->
+      <section id="tab-attendance" class="tab-section">
+        <div class="panel-card">
+          <h3 class="panel-title">📋 Month-Wise Student Attendance Entry</h3>
+          <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px;">Save attendance records month by month for students. This populates into the Student Portal dynamically.</p>
+          
+          <form onsubmit="saveStudentAttendance(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; align-items: end; margin-bottom: 20px;">
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600;">Select Month</label>
+              <select id="attMonth" class="form-control" required>
+                <option value="June 2026">June 2026</option>
+                <option value="July 2026">July 2026</option>
+                <option value="August 2026">August 2026</option>
+                <option value="September 2026">September 2026</option>
+                <option value="October 2026">October 2026</option>
+                <option value="November 2026" selected>November 2026</option>
+                <option value="December 2026">December 2026</option>
+                <option value="January 2027">January 2027</option>
+                <option value="February 2027">February 2027</option>
+                <option value="March 2027">March 2027</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600;">Student Roll No.</label>
+              <input type="text" id="attRoll" class="form-control" value="101" required>
+            </div>
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600;">Student Name</label>
+              <input type="text" id="attName" class="form-control" value="Patel Aarav R." required>
+            </div>
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600;">Working Days</label>
+              <input type="number" id="attTotal" class="form-control" value="24" min="1" required>
+            </div>
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600;">Present Days</label>
+              <input type="number" id="attPresent" class="form-control" value="22" min="0" required>
+            </div>
+            <button type="submit" class="btn-block">💾 Save Record</button>
+          </form>
+
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Roll No.</th>
+                  <th>Student Name</th>
+                  <th>Working Days</th>
+                  <th>Present Days</th>
+                  <th>Monthly %</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="attendanceRecordsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: HOMEWORK & STUDY MATERIAL -->
+      <section id="tab-homework" class="tab-section">
+        <div class="panel-card">
+          <h3 class="panel-title">📚 Assign Homework / Study Material</h3>
+          <form onsubmit="postHomework(event)" style="display: grid; gap: 12px; max-width: 650px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600;">Target Class</label>
+                <select id="hwStd" class="form-control">
+                  <option value="Std 9-A">Std 9-A</option>
+                  <option value="Std 10-A" selected>Std 10-A</option>
+                  <option value="Std 11-Arts">Std 11-Arts</option>
+                  <option value="Std 12-Arts">Std 12-Arts</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600;">Submission Deadline</label>
+                <input type="date" id="hwDue" class="form-control" required>
+              </div>
+            </div>
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600;">Assignment Title</label>
+              <input type="text" id="hwTitle" class="form-control" placeholder="e.g., Chapter 6: Life Processes Worksheet" required>
+            </div>
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600;">Instructions / Questions</label>
+              <textarea id="hwDesc" class="form-control" rows="3" placeholder="Write homework instructions or reference links..." required></textarea>
+            </div>
+            <button type="submit" class="btn-block" style="max-width: 240px;">📤 Post Assignment</button>
+          </form>
+        </div>
+
+        <div class="panel-card">
+          <h3 class="panel-title">Posted Assignments</h3>
+          <div id="teacherHomeworkList"></div>
+        </div>
+      </section>
+
+      <!-- TAB 4: APPLY FOR LEAVE -->
+      <section id="tab-leaves" class="tab-section">
+        <div class="panel-card">
+          <h3 class="panel-title">🗓️ Submit Leave Application to Principal</h3>
+          <form onsubmit="submitLeaveRequest(event)" style="display: grid; gap: 14px; max-width: 650px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600;">Leave Type</label>
+                <select id="leaveType" class="form-control">
+                  <option value="Casual Leave (CL)">Casual Leave (CL)</option>
+                  <option value="Medical Leave (ML)">Medical Leave (ML)</option>
+                  <option value="Duty Leave (DL)">Duty Leave (Official Exam/Training)</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600;">Substitute (Proxy) Teacher</label>
+                <input type="text" id="leaveProxy" class="form-control" placeholder="e.g., Jigishaben Parmar" required>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600;">From Date</label>
+                <input type="date" id="leaveFrom" class="form-control" required>
+              </div>
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600;">To Date</label>
+                <input type="date" id="leaveTo" class="form-control" required>
+              </div>
+            </div>
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600;">Reason for Leave</label>
+              <textarea id="leaveReason" class="form-control" rows="2" placeholder="Briefly explain reason..." required></textarea>
+            </div>
+            <button type="submit" class="btn-block" style="max-width: 240px;">📨 Send to Principal</button>
+          </form>
+        </div>
+
+        <div class="panel-card">
+          <h3 class="panel-title">My Leave History & Principal Status</h3>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Leave ID</th>
+                  <th>Type</th>
+                  <th>Dates</th>
+                  <th>Proxy Teacher</th>
+                  <th>Status</th>
+                  <th>Principal Remark</th>
+                </tr>
+              </thead>
+              <tbody id="myLeavesBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: STAFF NOTICES & TIMETABLE -->
+      <section id="tab-notices" class="tab-section">
+        <div class="panel-card">
+          <h3 class="panel-title">📢 Official Circulars from Principal</h3>
+          <div id="staffNoticesList"></div>
+        </div>
+
+        <div class="panel-card">
+          <h3 class="panel-title">🕒 My Daily Class Schedule</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Period</th>
+                <th>Time</th>
+                <th>Class</th>
+                <th>Subject</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Period 1</td><td>11:00 AM - 11:45 AM</td><td>Std 10-A</td><td id="ttSub1">Subject</td></tr>
+              <tr><td>Period 3</td><td>12:30 PM - 01:15 PM</td><td>Std 9-A</td><td id="ttSub2">Subject</td></tr>
+              <tr><td>Period 5</td><td>02:30 PM - 03:15 PM</td><td>Std 12-Arts</td><td id="ttSub3">Subject</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="portal-data.js"></script>
+  <script>
+    const activeTeacher = getCurrentUser();
+    if (!activeTeacher || activeTeacher.role !== "teacher") {
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("teacherName").innerText = activeTeacher.name;
+      document.getElementById("sidebarSubject").innerText = activeTeacher.subject || "Faculty";
+      document.getElementById("teacherMeta").innerText = `${activeTeacher.subject || "Subject"} Department • ${activeTeacher.classAssigned || "Highschool Section"}`;
+      document.getElementById("examSubject").value = activeTeacher.subject || "";
+      document.getElementById("ttSub1").innerText = activeTeacher.subject || "Class Lecture";
+      document.getElementById("ttSub2").innerText = activeTeacher.subject || "Class Lecture";
+      document.getElementById("ttSub3").innerText = activeTeacher.subject || "Class Lecture";
+    }
+
+    let parsedExcelRecords = [];
+
+    function switchTab(tabName, btn) {
+      document.querySelectorAll(".tab-section").forEach(sec => sec.classList.remove("active"));
+      document.querySelectorAll(".sidebar-nav button").forEach(b => b.classList.remove("active"));
+      document.getElementById("tab-" + tabName).classList.add("active");
+      btn.classList.add("active");
+    }
+
+    // Generate & download a real .xlsx template for teachers
+    function downloadSampleExcel() {
+      const sampleRows = [
+        { RollNo: "101", StudentName: "Patel Aarav R.", Marks: 45, MaxMarks: 50 },
+        { RollNo: "102", StudentName: "Sharma Diya K.", Marks: 48, MaxMarks: 50 },
+        { RollNo: "103", StudentName: "Prajapati Dev M.", Marks: 39, MaxMarks: 50 }
+      ];
+      const worksheet = XLSX.utils.json_to_sheet(sampleRows);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Marks");
+      XLSX.writeFile(workbook, "CPG_Highschool_Marks_Template.xlsx");
+    }
+
+    // Parse uploaded Excel/CSV file
+    function handleExcelFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: "array" });
+        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+        const jsonRows = XLSX.utils.sheet_to_json(firstSheet);
+
+        parsedExcelRecords = jsonRows.map(row => ({
+          roll: String(row.RollNo || row["Roll No"] || row.roll || "").trim(),
+          name: String(row.StudentName || row["Student Name"] || row.Name || "").trim(),
+          marks: Number(row.Marks || row["Marks Obtained"] || 0),
+          maxMarks: Number(row.MaxMarks || row["Max Marks"] || 50)
+        })).filter(r => r.roll && r.name);
+
+        const previewBox = document.getElementById("excelPreviewBox");
+        const previewBody = document.getElementById("excelPreviewBody");
+        document.getElementById("parsedCount").innerText = parsedExcelRecords.length;
+
+        if (parsedExcelRecords.length === 0) {
+          alert("Could not find valid rows. Please make sure columns are named: RollNo, StudentName, Marks, MaxMarks.");
+          previewBox.style.display = "none";
+          return;
+        }
+
+        previewBody.innerHTML = parsedExcelRecords.map(r => {
+          const pct = ((r.marks / r.maxMarks) * 100).toFixed(1);
+          return `
+            <tr>
+              <td><strong>${r.roll}</strong></td>
+              <td>${r.name}</td>
+              <td>${r.marks}</td>
+              <td>${r.maxMarks}</td>
+              <td><strong>${pct}%</strong></td>
+            </tr>
+          `;
+        }).join("");
+
+        previewBox.style.display = "block";
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function submitExamMarks(e) {
+      e.preventDefault();
+      if (parsedExcelRecords.length === 0) {
+        alert("Please select a valid Excel file first.");
+        return;
+      }
+
+      const db = getSchoolData();
+      db.examUploads.unshift({
+        id: "EX-" + Date.now(),
+        teacherName: activeTeacher.name,
+        std: document.getElementById("examStd").value,
+        subject: document.getElementById("examSubject").value.trim(),
+        examName: document.getElementById("examName").value,
+        uploadDate: new Date().toISOString().split("T")[0],
+        status: "Pending Approval",
+        records: parsedExcelRecords
+      });
+
+      saveSchoolData(db);
+      parsedExcelRecords = [];
+      document.getElementById("excelUploadForm").reset();
+      document.getElementById("excelPreviewBox").style.display = "none";
+      renderTeacherPortal();
+      alert("Excel marksheet uploaded! It will appear on the Student Portal once approved by the Principal.");
+    }
+
+    // Save Month-Wise Attendance Record
+    function saveStudentAttendance(e) {
+      e.preventDefault();
+      const db = getSchoolData();
+      if (!db.attendanceRecords) db.attendanceRecords = [];
+
+      const month = document.getElementById("attMonth").value;
+      const roll = document.getElementById("attRoll").value.trim();
+      const name = document.getElementById("attName").value.trim();
+      const totalDays = Number(document.getElementById("attTotal").value);
+      const presentDays = Number(document.getElementById("attPresent").value);
+
+      if (presentDays > totalDays) {
+        alert("Present days cannot exceed Total Working Days!");
+        return;
+      }
+
+      // Composite key for student + month
+      const recordKey = `${roll}-${month}`;
+      const existingIdx = db.attendanceRecords.findIndex(a => `${a.roll}-${a.month}` === recordKey);
+      
+      const record = { 
+        month, 
+        roll, 
+        name, 
+        totalDays, 
+        presentDays, 
+        updatedBy: activeTeacher.name 
+      };
+
+      if (existingIdx > -1) {
+        db.attendanceRecords[existingIdx] = record;
+      } else {
+        db.attendanceRecords.push(record);
+      }
+
+      saveSchoolData(db);
+      renderTeacherPortal();
+      alert(`Attendance for ${month} saved for ${name} (Roll No. ${roll})!`);
+    }
+
+    function deleteAttendance(index) {
+      if (confirm("Are you sure you want to delete this monthly attendance entry?")) {
+        const db = getSchoolData();
+        db.attendanceRecords.splice(index, 1);
+        saveSchoolData(db);
+        renderTeacherPortal();
+      }
+    }
+
+    function postHomework(e) {
+      e.preventDefault();
+      const db = getSchoolData();
+      if (!db.homeworks) db.homeworks = [];
+
+      db.homeworks.unshift({
+        id: "HW-" + Date.now(),
+        teacherName: activeTeacher.name,
+        subject: activeTeacher.subject || "General",
+        std: document.getElementById("hwStd").value,
+        dueDate: document.getElementById("hwDue").value,
+        title: document.getElementById("hwTitle").value.trim(),
+        desc: document.getElementById("hwDesc").value.trim()
+      });
+
+      saveSchoolData(db);
+      e.target.reset();
+      renderTeacherPortal();
+      alert("Assignment posted to Student Portal!");
+    }
+
+    function submitLeaveRequest(e) {
+      e.preventDefault();
+      const fromDate = document.getElementById("leaveFrom").value;
+      const toDate = document.getElementById("leaveTo").value;
+      const diffDays = Math.max(1, Math.round((new Date(toDate) - new Date(fromDate)) / (1000 * 60 * 60 * 24)) + 1);
+
+      const db = getSchoolData();
+      db.leaves.unshift({
+        id: "LV-" + Math.floor(1000 + Math.random() * 9000),
+        teacherId: activeTeacher.id,
+        teacherName: activeTeacher.name,
+        type: document.getElementById("leaveType").value,
+        fromDate,
+        toDate,
+        days: diffDays,
+        reason: document.getElementById("leaveReason").value.trim(),
+        proxyTeacher: document.getElementById("leaveProxy").value.trim(),
+        status: "Pending",
+        principalRemark: ""
+      });
+
+      saveSchoolData(db);
+      e.target.reset();
+      renderTeacherPortal();
+      alert("Leave request submitted to Principal!");
+    }
+
+    function renderTeacherPortal() {
+      const db = getSchoolData();
+
+      if (!db.attendanceRecords) {
+        db.attendanceRecords = [
+          { month: "November 2026", roll: "101", name: "Patel Aarav R.", totalDays: 24, presentDays: 22, updatedBy: "Aditya Raval" }
+        ];
+        saveSchoolData(db);
+      }
+      if (!db.homeworks) {
+        db.homeworks = [];
+      }
+
+      // 1. Uploaded Marksheets
+      const uploadsBody = document.getElementById("teacherUploadsBody");
+      const myUploads = db.examUploads.filter(ex => ex.teacherName === activeTeacher.name);
+      uploadsBody.innerHTML = myUploads.length ? myUploads.map(ex => `
+        <tr>
+          <td>${ex.uploadDate}</td>
+          <td><strong>${ex.std}</strong></td>
+          <td>${ex.subject}</td>
+          <td>${ex.examName}</td>
+          <td>${ex.records.length} Students</td>
+          <td><span class="status-pill ${ex.status === 'Published' ? 'status-approved' : 'status-pending'}">${ex.status}</span></td>
+        </tr>
+      `).join("") : `<tr><td colspan="6" style="text-align:center; color:#64748b;">No marksheets uploaded yet.</td></tr>`;
+
+      // 2. Month-Wise Attendance Records Table
+      const attBody = document.getElementById("attendanceRecordsBody");
+      const attRecords = db.attendanceRecords || [];
+      attBody.innerHTML = attRecords.length ? attRecords.map((a, index) => {
+        const pct = ((a.presentDays / a.totalDays) * 100).toFixed(1);
+        const lowWarning = pct < 80 ? `<span class="status-pill status-rejected" style="margin-left:6px;">Low</span>` : `<span class="status-pill status-approved" style="margin-left:6px;">Good</span>`;
+        return `
+          <tr>
+            <td><strong>${a.month}</strong></td>
+            <td>${a.roll}</td>
+            <td>${a.name}</td>
+            <td>${a.totalDays}</td>
+            <td>${a.presentDays}</td>
+            <td><strong>${pct}%</strong> ${lowWarning}</td>
+            <td><button class="action-btn btn-reject" onclick="deleteAttendance(${index})">Delete</button></td>
+          </tr>
+        `;
+      }).join("") : `<tr><td colspan="7" style="text-align:center; color:#64748b;">No monthly attendance records added yet.</td></tr>`;
+
+      // 3. Posted Homeworks
+      const hwList = document.getElementById("teacherHomeworkList");
+      const myHw = db.homeworks.filter(h => h.teacherName === activeTeacher.name);
+      hwList.innerHTML = myHw.length ? myHw.map(h => `
+        <div style="padding: 14px; border-left: 4px solid #2563eb; background: #f8fafc; border-radius: 8px; margin-bottom: 10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <strong>${h.title} (${h.std})</strong>
+            <span class="status-pill status-pending">Due: ${h.dueDate}</span>
+          </div>
+          <p style="margin-top: 6px; font-size: 0.9rem; color: #334155;">${h.desc}</p>
+        </div>
+      `).join("") : `<p style="color:#64748b;">No assignments posted yet.</p>`;
+
+      // 4. Leave History
+      const leavesBody = document.getElementById("myLeavesBody");
+      const myLeaves = db.leaves.filter(l => l.teacherName === activeTeacher.name);
+      leavesBody.innerHTML = myLeaves.length ? myLeaves.map(l => {
+        const cls = l.status === "Approved" ? "status-approved" : (l.status === "Rejected" ? "status-rejected" : "status-pending");
+        return `
+          <tr>
+            <td>${l.id}</td>
+            <td>${l.type}</td>
+            <td>${l.fromDate} → ${l.toDate} (${l.days}d)</td>
+            <td>${l.proxyTeacher}</td>
+            <td><span class="status-pill ${cls}">${l.status}</span></td>
+            <td>${l.principalRemark || "-"}</td>
+          </tr>
+        `;
+      }).join("") : `<tr><td colspan="6" style="text-align:center; color:#64748b;">No leave applications submitted.</td></tr>`;
+
+      // 5. Staff Notices
+      const staffNotices = db.notices.filter(n => n.audience !== "Students & Parents");
+      document.getElementById("staffNoticesList").innerHTML = staffNotices.map(n => `
+        <div style="padding: 14px; border-left: 4px solid #0d9488; background: #f8fafc; border-radius: 8px; margin-bottom: 10px;">
+          <div style="display:flex; justify-content:space-between;">
+            <strong>${n.title}</strong>
+            <small style="color:#64748b;">${n.date}</small>
+          </div>
+          <p style="margin-top: 6px; font-size: 0.92rem; color: #334155;">${n.content}</p>
+        </div>
+      `).join("");
+    }
+
+    renderTeacherPortal();
+  </script>
+</body>
+</html>
