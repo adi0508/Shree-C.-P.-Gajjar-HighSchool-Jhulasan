@@ -8,13 +8,22 @@
 </head>
 <body>
 
+  <!-- Top Announcement Ticker Bar -->
+  <div class="top-announcement-bar">
+    <div class="container ticker-inner">
+      <span class="ticker-badge-new"><span class="ticker-pulse"></span>Notice</span>
+      <marquee scrollamount="5">
+        📢 Second Term Examination timetables are now live. Student &amp; Teacher portals are fully operational via 🔐 Portal Login.
+      </marquee>
+    </div>
+  </div>
+
   <!-- Top Header -->
   <header class="site-header">
     <div class="container header-container">
       <div class="brand">
         <img src="Images/School Logo.png" alt="School Logo" class="brand-logo">
         <div class="brand-text">
-          <p class="tagline">|| સત્યમેવ જયતે ||</p>
           <p class="managed-by">શ્રી ઝુલાસણ કેળવણી મંડળ સંચાલિત</p>
           <h1 class="school-name">શ્રી સી.પી.ગજ્જર હાઈસ્કૂલ, ઝુલાસણ</h1>
         </div>
@@ -31,117 +40,210 @@
   <!-- Sticky Navbar -->
   <nav class="navbar" id="navbar">
     <ul class="nav-links container">
+      <li><a href="#leadership">🏛️ વહીવટી તંત્ર</a></li>
       <li><a href="#notices">📋 સૂચનાઓ</a></li>
       <li><a href="#events">🎉 કાર્યક્રમો</a></li>
       <li><a href="#projects">💻 પ્રોજેક્ટ્સ</a></li>
-      <li><a href="#Mandal">🏛️ મંડળ</a></li>
       <li><a href="#faculty">👨‍🏫 શિક્ષકગણ</a></li>
       <li><a href="#eca">🏆 પ્રવૃત્તિઓ</a></li>
       <li><a href="#committees">🤝 સમિતિઓ</a></li>
       <li><a href="#result">📊 પરિણામ</a></li>
       <li><a href="#contact">📍 સંપર્ક</a></li>
-      <li><a href="portals/login.html" target="_blank" style="background: #f59e0b; color: #0f172a; font-weight: 800;">🔐 Portal Login</a></li>
+      <li><a href="#donate">❤️ સહયોગ (Donate)</a></li>
+      <li><a href="portals/login.html" target="_blank" class="nav-portal-btn">🔐 Portal Login</a></li>
     </ul>
   </nav>
 
-  <!-- Hero Section -->
-  <section id="hero" class="hero-section">
-    <div class="container hero-content">
-      <div class="hero-badge">✨ સત્તાવાર શૈક્ષણિક પોર્ટલ • Estd. 1965</div>
-      <h2 class="hero-title">ભવિષ્યના નિર્માણ તરફ એક પગલું</h2>
-      <p class="hero-subtitle">અભ્યાસની સાથે સાથે જીવન શિક્ષણ. સાહિત્ય, કલા, વિજ્ઞાન અને મૂલ્યોથી મનનું પોષણ કરવું.</p>
-      <div class="hero-image-wrapper">
-        <img src="Images/School Building.jpg" alt="School Image" class="hero-image">
+  <!-- Immersive Professional Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-badge-pill">
+        <span>⭐ Shree Jhulasan Kelvani Mandal Managed • Estd, 1965</span>
+      </div>
+      <h2 class="hero-title">
+        Shree C. P. Gajjar Highschool, <span>Jhulasan</span>
+      </h2>
+      <p class="hero-subtitle">
+        Empowering young minds through quality education, moral values, and modern digital learning tools in North Gujarat.
+      </p>
+
+      <div class="hero-stats-row">
+        <div class="hero-stat-item">
+          <div>50+</div>
+          <div>Years Legacy</div>
+        </div>
+        <div class="hero-stat-item">
+          <div>98%</div>
+          <div>Board Pass Rate</div>
+        </div>
+        <div class="hero-stat-item">
+          <div>1200+</div>
+          <div>Active Students</div>
+        </div>
       </div>
     </div>
   </section>
 
   <main class="main-content">
-    
-    <!-- Notices & Events -->
-    <div class="container grid-layout grid-2 mobile-col-1" style="margin-top: 20px;">
-      <!-- Notice Board -->
-      <section id="notices" class="card">
-        <h2 class="section-title">સૂચનાઓ (Notice Board)</h2>
-        <div class="static-list-container">
-          <div class="info-item">
-            <span class="info-date">11 સપ્ટેમ્બર 2025 થી 20 સપ્ટેમ્બર 2025</span>
-            <h3 class="info-title">એકમ કસોટી (Std 9–12)</h3>
-            <a href="files/timetable.pdf" class="btn btn-outline" download>📥 ટાઈમટેબલ ડાઉનલોડ કરો</a>
-          </div>
-          <div class="info-item">
-            <span class="info-date">Yearly Publication</span>
-            <h3 class="info-title">પ્રાર્થના પોથી (Prayer Book)</h3>
-            <a href="files/શાળા ગીતાવલી 2026.pdf" class="btn btn-outline" download>📥 પ્રાર્થના પોથી ડાઉનલોડ કરો</a>
-          </div>
-          <div class="info-item">
-            <span class="info-date">Academic Year 2024-2025</span>
-            <h3 class="info-title">વાર્ષિક અહેવાલ (Yearly Report)</h3>
-            <a href="files/yearly-report.pdf" class="btn btn-outline" download>📥 અહેવાલ ડાઉનલોડ કરો</a>
-          </div>
-        </div>
-      </section>
 
-      <!-- Events -->
-      <section id="events" class="card">
-        <h2 class="section-title">આગામી કાર્યક્રમો (Events)</h2>
-        <div class="static-list-container">
-          <div class="info-item">
-            <span class="info-date">10 Sep 2025 • આત્મસંતોષ હૉલ, 11:30 AM</span>
-            <h3 class="info-title">તિથિ ભોજન</h3>
+    <!-- Leadership Section: Principal, President, Secretary & Trustees -->
+    <section id="leadership" class="section container">
+      <div class="text-center section-header">
+        <h2 class="section-title">Leadership &amp; Management</h2>
+        <p class="section-subtitle">Guiding our institution towards excellence with vision and commitment.</p>
+      </div>
+
+      <!-- Principal Desk -->
+      <div class="principal-desk">
+        <div class="principal-img-box">
+          <img src="Images/Principal Ambalal Prajapati.jpg" alt="Principal Ambalal Prajapati" onerror="this.src='Images/Principal.png'">
+        </div>
+        <div class="principal-content">
+          <h3>From the Principal's Desk</h3>
+          <h4>Shri Ambalal Prajapati (Principal) • M.Sc., B.Ed.</h4>
+          <p>
+            "Welcome to our digital home. Managed under the esteemed guidance of the <strong>Jhulasan Kelvani Mandal</strong>, our institution has been dedicated to shaping bright futures, fostering moral values, and delivering academic excellence in North Gujarat for decades."
+          </p>
+          <p>
+            With our digital portals, parents, students, and teachers are now connected seamlessly—enabling transparent tracking, digital report cards, and modern learning.
+          </p>
+        </div>
+      </div>
+
+      <!-- President & Secretary Messages Grid -->
+      <div class="leadership-grid">
+        <div class="leadership-card president-border">
+          <div class="leader-profile-header">
+            <img src="Images/db patel.jpeg" alt="Dineshbhai Patel" class="leader-avatar">
+            <div class="leader-info">
+              <h4>Dineshbhai Patel</h4>
+              <p>President, Jhulasan Kelvani Mandal</p>
+            </div>
           </div>
-          <div class="info-item">
-            <span class="info-date">15 Oct 2025 • શાળાનું સભાખંડ, 09:00 AM</span>
-            <h3 class="info-title">વાર્ષિક સ્નેહમિલન (Annual Gathering)</h3>
+          <p class="leader-message">
+            "Education is the most powerful weapon which you can use to change the community. Our commitment at Shree C. P. Gajjar Highschool is to provide world-class infrastructure and rural opportunity hand-in-hand."
+          </p>
+        </div>
+
+        <div class="leadership-card">
+          <div class="leader-profile-header">
+            <img src="Images/ashokkumar.png" alt="Ashokkumar Patel" class="leader-avatar">
+            <div class="leader-info">
+              <h4>Ashokkumar Patel</h4>
+              <p>Secretary, Jhulasan Kelvani Mandal</p>
+            </div>
           </div>
-          <div class="info-item">
-            <span class="info-date">28 Nov 2025 • પ્રયોગશાળા, 10:00 AM</span>
-            <h3 class="info-title">વિજ્ઞાન મેળો (Science Fair)</h3>
+          <p class="leader-message">
+            "We take immense pride in blending traditional moral discipline with modern digital advancements. Seeing our students excel in academics, sports, and technical projects drives our continuous efforts."
+          </p>
+        </div>
+      </div>
+
+      <!-- Trustee Details Trigger linked to dedicated page -->
+      <a href="trustees/trustees.html" target="_blank" class="trustee-trigger-box interactive-card text-center" style="display: block; text-decoration: none; max-width: 480px; margin: 0 auto 24px auto; padding: 14px 20px;">
+        <h3 style="color: #ffffff; margin: 0; font-size: 0.98rem;">📋 View Trustee Committee Details &amp; Members</h3>
+      </a>
+
+      <!-- Core Values Section -->
+      <div class="values-grid">
+        <div class="value-box">
+          <div class="icon">🎯</div>
+          <h4>Our Mission</h4>
+          <p>To impart holistic education that nurtures intellectual curiosity, social responsibility, and ethical leadership.</p>
+        </div>
+        <div class="value-box">
+          <div class="icon">💡</div>
+          <h4>Innovation First</h4>
+          <p>Integrating modern digital tools, science labs, and interactive web portals into standard rural education.</p>
+        </div>
+        <div class="value-box">
+          <div class="icon">🤝</div>
+          <h4>Community Trust</h4>
+          <p>Proudly sustained through decades of dedication by the Jhulasan Kelvani Mandal and local well-wishers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notices & Events -->
+    <section class="section-compact container">
+      <div class="grid-layout grid-2 mobile-col-1">
+        <!-- Notice Board -->
+        <div id="notices" class="lively-notice-card">
+          <h2 class="section-title">સૂચનાઓ (Notice Board)</h2>
+          <p class="card-desc">Official announcements, circulars, and schedules.</p>
+          <div class="static-list-container">
+            <div class="lively-info-item">
+              <span class="info-date">🗓️ 11 Sep 2025 – 20 Sep 2025</span>
+              <h3 class="info-title">એકમ કસોટી (Std 9–12 Unit Test)</h3>
+              <a href="files/timetable.pdf" class="btn btn-outline" download>📥 ટાઈમટેબલ ડાઉનલોડ કરો</a>
+            </div>
+            <div class="lively-info-item">
+              <span class="info-date">📖 Yearly Publication</span>
+              <h3 class="info-title">પ્રાર્થના પોથી (School Prayer Book)</h3>
+              <a href="files/શાળા ગીતાવલી 2026.pdf" class="btn btn-outline" download>📥 પ્રાર્થના પોથી ડાઉનલોડ કરો</a>
+            </div>
+            <div class="lively-info-item">
+              <span class="info-date">📊 Academic Year 2024-2025</span>
+              <h3 class="info-title">વાર્ષિક અહેવાલ (Annual Report)</h3>
+              <a href="files/yearly-report.pdf" class="btn btn-outline" download>📥 અહેવાલ ડાઉનલોડ કરો</a>
+            </div>
           </div>
         </div>
-      </section>
-    </div>
+
+        <!-- Events -->
+        <div id="events" class="lively-event-card">
+          <h2 class="section-title">આગામી કાર્યક્રમો (Events)</h2>
+          <p class="card-desc">Upcoming school gatherings, celebrations, and fairs.</p>
+          <div class="static-list-container">
+            <div class="lively-event-item">
+              <span class="info-date">🕒 10 Sep 2025 • આત્મસંતોષ હૉલ, 11:30 AM</span>
+              <h3 class="info-title">તિથિ ભોજન (Community Feast)</h3>
+            </div>
+            <div class="lively-event-item">
+              <span class="info-date">🕒 15 Oct 2025 • શાળાનું સભાખંડ, 09:00 AM</span>
+              <h3 class="info-title">વાર્ષિક સ્નેહમિલન (Annual Gathering)</h3>
+            </div>
+            <div class="lively-event-item">
+              <span class="info-date">🕒 28 Nov 2025 • પ્રયોગશાળા, 10:00 AM</span>
+              <h3 class="info-title">વિજ્ઞાન મેળો (Science Fair &amp; Exhibits)</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Projects -->
     <section id="projects" class="section container">
-      <h2 class="section-title text-center">School Projects</h2>
-      <p class="text-center" style="color: var(--text-muted);">Explore interactive science and learning web projects developed by our school.</p>
-      <div class="grid-layout grid-2 mobile-col-2 mt-20">
-        <a href="Solar-System-Chatbot/index.html" target="_blank" class="card interactive-card flex-center">
-          <h3>🪐 Our Solar System</h3>
+      <div class="text-center section-header">
+        <h2 class="section-title">School Projects</h2>
+        <p class="section-subtitle">Explore interactive science and learning web apps developed by our school community.</p>
+      </div>
+      <div class="grid-layout grid-2 mobile-col-1">
+        <a href="Solar-System-Chatbot/index.html" target="_blank" class="lively-project-card">
+          <div class="project-icon-box">🪐</div>
+          <div class="project-card-body">
+            <h3>Our Solar System Explorer</h3>
+            <p>Interactive planetary chatbot and educational space simulator.</p>
+          </div>
         </a>
-        <a href="KBC_JQC/index.html" target="_blank" class="card interactive-card flex-center">
-          <h3>❓ Interactive Quiz</h3>
+        <a href="KBC_JQC/index.html" target="_blank" class="lively-project-card">
+          <div class="project-icon-box">❓</div>
+          <div class="project-card-body">
+            <h3>Interactive Quiz Arena</h3>
+            <p>Engaging quiz platform testing student knowledge and speed.</p>
+          </div>
         </a>
       </div>
     </section>
 
-    <!-- Trust Management -->
-    <section id="Mandal" class="section container">
-      <h2 class="section-title text-center">Jhulasan Kelvani Mandal</h2>
-      <div class="grid-layout grid-2 mobile-col-2 mt-20" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-        <div class="card text-center profile-card">
-          <img src="Images/db patel.jpeg" alt="Dineshbhai Patel" class="avatar">
-          <h3 class="profile-name">Dineshbhai Patel</h3>
-          <p class="profile-role">President</p>
-        </div>
-        <div class="card text-center profile-card">
-          <img src="Images/ashokkumar.png" alt="Ashokkumar Patel" class="avatar">
-          <h3 class="profile-name">Ashokkumar Patel</h3>
-          <p class="profile-role">Secretary</p>
-        </div>
-      </div>
-      <div class="trustee-trigger-box interactive-card text-center" onclick="window.open('trustees/trustees.html', '_blank')">
-  <h3>📋 Click Here to View All Trustees Details</h3>
-</div>
-    </section>
-
-    <!-- Faculty -->
+    <!-- Faculty & Staff -->
     <section id="faculty" class="section container">
-      <h2 class="section-title text-center">Faculty & Staff</h2>
-      <p class="text-center" style="color: var(--text-muted);">Click on any faculty card to view professional credentials and roles.</p>
-      <div class="grid-layout grid-3 mobile-col-3 mt-20">
-        
+      <div class="text-center section-header">
+        <h2 class="section-title">Faculty &amp; Staff</h2>
+        <p class="section-subtitle">Dedicated mentors shaping minds with passion and expertise. Click any card to inspect details.</p>
+      </div>
+      <div class="grid-layout grid-3 mobile-col-3">
+
         <!-- Faculty Card 1 -->
         <div class="profile-card-container" onclick="flipCard(this)">
           <div class="profile-card-flipper">
@@ -155,7 +257,7 @@
               <h3 class="profile-name">Ambalal Prajapati</h3>
               <p class="profile-role">Principal</p>
               <p><strong>Education:</strong> M.Sc., B.Ed.</p>
-              <p><strong>Role:</strong> Administration & Mathematics</p>
+              <p><strong>Role:</strong> Administration &amp; Mathematics</p>
             </div>
           </div>
         </div>
@@ -245,7 +347,7 @@
               <h3 class="profile-name">Jigishaben Parmar</h3>
               <p class="profile-role">Teacher</p>
               <p><strong>Education:</strong> B.Sc., B.Ed.</p>
-              <p><strong>Role:</strong> Mathematics & Science Teacher</p>
+              <p><strong>Role:</strong> Mathematics &amp; Science Teacher</p>
             </div>
           </div>
         </div>
@@ -309,33 +411,50 @@
 
     <!-- Extra Curricular Activities -->
     <section id="eca" class="section container">
-      <h2 class="section-title text-center">Extra Curricular Activities</h2>
-      <div class="grid-layout grid-gallery mobile-col-2 mt-20">
-        <div class="gallery-item interactive-card" onclick="openEventGallery('independenceDay')">
-          <div class="uniform-media-box">
+      <div class="text-center section-header">
+        <h2 class="section-title">Extra Curricular Activities</h2>
+        <p class="section-subtitle">Moments of achievement, cultural vibrancy, and experiential learning.</p>
+      </div>
+      
+      <div class="lively-activity-grid">
+        <div class="lively-activity-card" onclick="openEventGallery('independenceDay')">
+          <div class="activity-img-box">
             <img src="Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.20.15 PM (1).jpeg" alt="Independence Day">
           </div>
-          <div class="gallery-caption">Independence Day Celebration</div>
+          <div class="activity-caption-box">
+            <h4>Independence Day Celebration</h4>
+            <p>Patriotic performances, parades, and community assembly.</p>
+          </div>
         </div>
-        <div class="gallery-item interactive-card" onclick="openLightbox(this.querySelector('.uniform-media-box img'))">
-          <div class="uniform-media-box">
+
+        <div class="lively-activity-card" onclick="openLightbox(this.querySelector('.activity-img-box img'))">
+          <div class="activity-img-box">
             <img src="Images/Purna_Chess_Winner.jpg" alt="SGFI U-19 Chess Winner">
           </div>
-          <div class="gallery-caption">Chess Champion</div>
+          <div class="activity-caption-box">
+            <h4>🏆 Chess Championship</h4>
+            <p>Celebrating sportsmanship and strategic brilliance at district level.</p>
+          </div>
         </div>
-        <div class="gallery-item interactive-card" onclick="openLightbox(this.querySelector('.uniform-media-box img'))">
-          <div class="uniform-media-box">
+
+        <div class="lively-activity-card" onclick="openLightbox(this.querySelector('.activity-img-box img'))">
+          <div class="activity-img-box">
             <img src="Images/gallery1.jpg" alt="Postoffice Visit">
           </div>
-          <div class="gallery-caption">Visit to Postoffice</div>
+          <div class="activity-caption-box">
+            <h4>✉️ Educational Field Trips</h4>
+            <p>Practical out-of-classroom learning experience for students.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Committees -->
     <section id="committees" class="section container">
-      <h2 class="section-title text-center">સમિતિઓ (Committees)</h2>
-      <div class="grid-layout grid-4 mobile-col-3 mt-20">
+      <div class="text-center section-header">
+        <h2 class="section-title">સમિતિઓ (Committees)</h2>
+      </div>
+      <div class="grid-layout grid-4 mobile-col-3">
         <a href="committees/prarthna.html" target="_blank" class="btn btn-primary interactive-card">🙏 પ્રાર્થના સમિતિ</a>
         <a href="committees/aarogya.html" target="_blank" class="btn btn-primary interactive-card">🏥 આરોગ્ય સમિતિ</a>
         <a href="committees/shist.html" target="_blank" class="btn btn-primary interactive-card">⚖️ શિસ્ત સમિતિ</a>
@@ -352,26 +471,98 @@
 
     <!-- Result -->
     <section id="result" class="section container">
-      <h2 class="section-title text-center">Results</h2>
-      <div class="grid-layout grid-3 mobile-col-3 mt-20">
-        <a href="Result/fe.html" target="_blank" class="card interactive-card flex-center"><h3>First Exam Result</h3></a>
-        <a href="Result/404.html" target="_blank" class="card interactive-card flex-center"><h3>Second Exam Result</h3></a>
-        <a href="Result/404.html" target="_blank" class="card interactive-card flex-center"><h3>Annual Exam Result</h3></a>
+      <div class="text-center section-header">
+        <h2 class="section-title">Academic Results</h2>
+        <p class="section-subtitle">Access verified student performance reports and term scorecards.</p>
+      </div>
+      
+      <div class="grid-layout grid-3 mobile-col-3">
+        <a href="Result/fe.html" target="_blank" class="lively-result-card">
+          <div class="result-icon">📄</div>
+          <h3>First Exam Result</h3>
+          <span class="result-link">View Scorecard →</span>
+        </a>
+        <a href="Result/404.html" target="_blank" class="lively-result-card">
+          <div class="result-icon">📊</div>
+          <h3>Second Exam Result</h3>
+          <span class="result-link">View Scorecard →</span>
+        </a>
+        <a href="Result/404.html" target="_blank" class="lively-result-card">
+          <div class="result-icon">⭐</div>
+          <h3>Annual Exam Result</h3>
+          <span class="result-link">View Scorecard →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Support & Donation Section -->
+    <section id="donate" class="section container">
+      <div class="text-center section-header">
+        <h2 class="section-title">Support Our School (દાન અને સહયોગ)</h2>
+        <p class="section-subtitle">Be a part of shaping rural education and empowering young minds for tomorrow.</p>
+      </div>
+      
+      <div class="card donation-card">
+        <div class="donation-content text-center">
+          <div class="donation-icon-badge">❤️</div>
+          <h3 class="donation-heading">Invest in a Child's Future, Build Our Community</h3>
+          <p class="donation-text">
+            શ્રી સી.પી.ગજ્જર હાઈસ્કૂલ, ઝુલાસણ એ ગ્રામ્ય વિસ્તારના વિદ્યાર્થીઓને ગુણવત્તાયુક્ત શિક્ષણ પૂરું પાડતી સંસ્થા છે. 
+            તમારો નાનો સહયોગ પણ વિદ્યાર્થીઓના ઉજ્જવળ ભવિષ્ય, ડિજિટલ ક્લાસરૂમ અને શાળાના વિકાસમાં મોટું યોગદાન આપી શકે છે. 
+            જો તમે અમારી શાળાના વિકાસ કાર્યમાં સહભાગી બનવા અથવા આર્થિક અનુદાન આપવા માંગતા હોવ, તો નીચે આપેલા નંબર પર અમારો સંપર્ક કરી શકો છો.
+          </p>
+          <div class="donation-contacts-row">
+            <a href="tel:+9194263 48771" class="btn btn-primary">
+              📞 Principal: +91 94263 48771
+            </a>
+            <a href="tel:9198795 45687" class="btn btn-outline" style="border-color: var(--primary-color); color: var(--primary-color);">
+              📞 Secretary: +91 98795 45687
+            </a>
+          </div>
+          <p class="donation-footer-note">
+            🙏 "કેળવણી એ સમાજ રૂપાંતરનું સૌથી મોટું શસ્ત્ર છે." આપના સહકાર બદલ હાર્દિક આભાર!
+          </p>
+        </div>
       </div>
     </section>
 
     <!-- Contact -->
     <section id="contact" class="section container">
-      <h2 class="section-title text-center">Contact Us</h2>
-      <div class="card mt-20" style="background: linear-gradient(to bottom right, #ffffff, #f0fdfa);">
-        <div class="grid-layout grid-2 mobile-col-1">
+      <div class="text-center section-header">
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">We are happy to answer your queries and connect with parents and well-wishers.</p>
+      </div>
+      
+      <div class="card contact-card">
+        <div class="grid-layout grid-2 mobile-col-1 contact-grid">
           <div class="contact-info flex-column">
-            <p><strong>📞 Phone:</strong> <a href="tel:+919725643008" style="color: var(--primary-color); text-decoration: none;">+91 9725643008</a></p>
-            <p><strong>✉️ Email:</strong> <br><span style="color: var(--text-muted);">cpgajjarhighschool@gmail.com</span></p>
-            <p><strong>📍 Address:</strong> <br><span style="color: var(--text-muted);">Jhulasan, Kadi, Mehsana, Gujarat</span></p>
+            <div class="contact-item">
+              <div class="contact-icon-box bg-teal">📞</div>
+              <div>
+                <strong>Phone Inquiry</strong>
+                <a href="tel:+9194263 48771">+91 94263 48771</a>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon-box bg-blue">✉️</div>
+              <div>
+                <strong>Official Email</strong>
+                <span>cpgajjarhighschool@gmail.com</span>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon-box bg-amber">📍</div>
+              <div>
+                <strong>Campus Location</strong>
+                <span>Jhulasan, Ta. Kadi, Dist. Mehsana, Gujarat - 382705</span>
+              </div>
+            </div>
           </div>
+          
           <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3663.7353244658207!2d72.47059507510149!3d23.32535997896269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c252a828337e9%3A0x98d7819e5b96ecc4!2sC%20P%20High%20School!5e0!3m2!1sen!2sus!4v1757315272878!5m2!1sen!2sus" width="100%" height="250" style="border:0; border-radius:12px; box-shadow: var(--shadow-sm);" allowfullscreen></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3663.7353244658207!2d72.47059507510149!3d23.32535997896269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c252a828337e9%3A0x98d7819e5b96ecc4!2sC%20P%20High%20School!5e0!3m2!1sen!2sus!4v1757315272878!5m2!1sen!2sus" width="100%" height="260" allowfullscreen loading="lazy"></iframe>
           </div>
         </div>
       </div>
@@ -381,9 +572,9 @@
 
   <!-- Universal Footer -->
   <footer class="site-footer">
-    <div class="container text-center" style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
-      <p style="font-size: 1.05rem;">શ્રી સી.પી.ગજ્જર હાઈસ્કૂલ, ઝુલાસણ</p>
-      <p style="font-size: 0.85rem; opacity: 0.8;">© 2026 All Rights Reserved • Designed with dedication for rural education excellence.</p>
+    <div class="container text-center footer-inner">
+      <p class="footer-title">શ્રી સી.પી.ગજ્જર હાઈસ્કૂલ, ઝુલાસણ</p>
+      <p class="footer-copy">© 2026 All Rights Reserved • Managed by Shree Jhulasan Kelvani Mandal.</p>
     </div>
   </footer>
 
@@ -403,7 +594,7 @@
   </div>
   
   <a href="https://wa.me/919725643008?text=નમસ્તે,%20મને%20શાળા વિશે%20માહિતીની%20જરૂર%20છે." class="whatsapp-float" target="_blank" title="WhatsApp પર સંપર્ક કરો">
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
       <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.558 6.558 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.347.1-.1.133-.168.198-.28.065-.112.032-.21-.016-.298-.049-.088-.445-1.076-.61-1.47-.16-.389-.323-.335-.445-.34l-.38-.007c-.133 0-.348.048-.53.247-.182.198-.694.678-.694 1.654 0 .976.71 1.916.808 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.078.38-.058 1.17-.48 1.338-.943.168-.463.168-.86.118-.943-.05-.084-.184-.133-.382-.232"/>
     </svg>
   </a>
@@ -413,9 +604,6 @@
     <div class="modal-content">
       <span class="close-btn" onclick="closeTrusteeModal()">×</span>
       <h2 class="section-title text-center">Trustee Committee Details</h2>
-      <div class="mt-20 text-center">
-        <img src="Images/Karobari Sabhy.jpeg" alt="Trustee Details" style="max-width: 100%; border-radius: 12px; box-shadow: var(--shadow-sm);">
-      </div>
     </div>
   </div>
 
