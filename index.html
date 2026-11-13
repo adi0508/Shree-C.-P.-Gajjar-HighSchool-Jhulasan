@@ -20,78 +20,82 @@
         </div>
       </div>
       <!-- Mobile Menu Button -->
-      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu Toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
   <!-- Sticky Navbar -->
   <nav class="navbar" id="navbar">
     <ul class="nav-links container">
-      <li><a href="#notices">Notices</a></li>
-      <li><a href="#events">Events</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#faculty">Faculty</a></li>
-      <li><a href="#eca">Activities</a></li>
-      <li><a href="#committees">Committees</a></li>
-      <li><a href="#result">Result</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#notices">📋 સૂચનાઓ</a></li>
+      <li><a href="#events">🎉 કાર્યક્રમો</a></li>
+      <li><a href="#projects">💻 પ્રોજેક્ટ્સ</a></li>
+      <li><a href="#Mandal">🏛️ મંડળ</a></li>
+      <li><a href="#faculty">👨‍🏫 શિક્ષકગણ</a></li>
+      <li><a href="#eca">🏆 પ્રવૃત્તિઓ</a></li>
+      <li><a href="#committees">🤝 સમિતિઓ</a></li>
+      <li><a href="#result">📊 પરિણામ</a></li>
+      <li><a href="#contact">📍 સંપર્ક</a></li>
     </ul>
   </nav>
 
   <!-- Hero Section -->
   <section id="hero" class="hero-section">
     <div class="container hero-content">
-      <h2 class="hero-title">શ્રી સી.પી.ગજ્જર હાઈસ્કૂલ</h2>
+      <div class="hero-badge">✨ સત્તાવાર શૈક્ષણિક પોર્ટલ • Estd. 1965</div>
+      <h2 class="hero-title">ભવિષ્યના નિર્માણ તરફ એક પગલું</h2>
       <p class="hero-subtitle">અભ્યાસની સાથે સાથે જીવન શિક્ષણ. સાહિત્ય, કલા, વિજ્ઞાન અને મૂલ્યોથી મનનું પોષણ કરવું.</p>
-      <img src="Images/School Building.png" alt="School Image" class="hero-image">
+      <div class="hero-image-wrapper">
+        <img src="Images/School Building.jpg" alt="School Image" class="hero-image">
+      </div>
     </div>
   </section>
 
   <main class="main-content">
     
-    <!-- Notices & Events (Grid Layout) -->
-    <div class="container grid-layout grid-2" style="margin-top: 40px;">
+    <!-- Notices & Events -->
+    <div class="container grid-layout grid-2 mobile-col-1" style="margin-top: 20px;">
       <!-- Notice Board -->
       <section id="notices" class="card">
-        <h2 class="section-title">Notice Board & Documents</h2>
-        <div class="scrolling-window">
-          <div class="scrolling-content">
-            <div class="info-item">
-              <span class="info-date">11 સપ્ટેમ્બર 2025 થી 20 સપ્ટેમ્બર 2025</span>
-              <h3 class="info-title">એકમ કસોટી (Std 9–12)</h3>
-              <a href="timetable.pdf" class="btn btn-outline" download>📥 Download Timetable</a>
-            </div>
-            <div class="info-item">
-              <span class="info-date">Yearly Publication</span>
-              <h3 class="info-title">પ્રાર્થના પોથી (Prayer Book)</h3>
-              <a href="prayer-book.pdf" class="btn btn-outline" download>📥 Download Prayer Book</a>
-            </div>
-            <div class="info-item">
-              <span class="info-date">Academic Year 2024-2025</span>
-              <h3 class="info-title">વાર્ષિક અહેવાલ (Yearly Report)</h3>
-              <a href="yearly-report.pdf" class="btn btn-outline" download>📥 Download Yearly Report</a>
-            </div>
+        <h2 class="section-title">સૂચનાઓ (Notice Board)</h2>
+        <div class="static-list-container">
+          <div class="info-item">
+            <span class="info-date">11 સપ્ટેમ્બર 2025 થી 20 સપ્ટેમ્બર 2025</span>
+            <h3 class="info-title">એકમ કસોટી (Std 9–12)</h3>
+            <a href="timetable.pdf" class="btn btn-outline" download>📥 ટાઈમટેબલ ડાઉનલોડ કરો</a>
+          </div>
+          <div class="info-item">
+            <span class="info-date">Yearly Publication</span>
+            <h3 class="info-title">પ્રાર્થના પોથી (Prayer Book)</h3>
+            <a href="prayer-book.pdf" class="btn btn-outline" download>📥 પ્રાર્થના પોથી ડાઉનલોડ કરો</a>
+          </div>
+          <div class="info-item">
+            <span class="info-date">Academic Year 2024-2025</span>
+            <h3 class="info-title">વાર્ષિક અહેવાલ (Yearly Report)</h3>
+            <a href="yearly-report.pdf" class="btn btn-outline" download>📥 અહેવાલ ડાઉનલોડ કરો</a>
           </div>
         </div>
       </section>
 
       <!-- Events -->
       <section id="events" class="card">
-        <h2 class="section-title">Upcoming Events</h2>
-        <div class="scrolling-window">
-          <div class="scrolling-content">
-            <div class="info-item">
-              <span class="info-date">10 Sep 2025 • આત્મસંતોષ હૉલ, 11:30 AM</span>
-              <h3 class="info-title">તિથિ ભોજન</h3>
-            </div>
-            <div class="info-item">
-              <span class="info-date">15 Oct 2025 • શાળાનું સભાખંડ, 09:00 AM</span>
-              <h3 class="info-title">વાર્ષિક સ્નેહમિલન (Annual Gathering)</h3>
-            </div>
-            <div class="info-item">
-              <span class="info-date">28 Nov 2025 • પ્રયોગશાળા, 10:00 AM</span>
-              <h3 class="info-title">વિજ્ઞાન મેળો (Science Fair)</h3>
-            </div>
+        <h2 class="section-title">આગામી કાર્યક્રમો (Events)</h2>
+        <div class="static-list-container">
+          <div class="info-item">
+            <span class="info-date">10 Sep 2025 • આત્મસંતોષ હૉલ, 11:30 AM</span>
+            <h3 class="info-title">તિથિ ભોજન</h3>
+          </div>
+          <div class="info-item">
+            <span class="info-date">15 Oct 2025 • શાળાનું સભાખંડ, 09:00 AM</span>
+            <h3 class="info-title">વાર્ષિક સ્નેહમિલન (Annual Gathering)</h3>
+          </div>
+          <div class="info-item">
+            <span class="info-date">28 Nov 2025 • પ્રયોગશાળા, 10:00 AM</span>
+            <h3 class="info-title">વિજ્ઞાન મેળો (Science Fair)</h3>
           </div>
         </div>
       </section>
@@ -100,8 +104,8 @@
     <!-- Projects -->
     <section id="projects" class="section container">
       <h2 class="section-title text-center">School Projects</h2>
-      <p class="text-center">Explore interactive science and learning web projects developed by our school.</p>
-      <div class="grid-layout grid-2 mt-20">
+      <p class="text-center" style="color: var(--text-muted);">Explore interactive science and learning web projects developed by our school.</p>
+      <div class="grid-layout grid-2 mobile-col-2 mt-20">
         <a href="Solar-System-Chatbot/index.html" target="_blank" class="card interactive-card flex-center">
           <h3>🪐 Our Solar System</h3>
         </a>
@@ -111,40 +115,207 @@
       </div>
     </section>
 
+    <!-- Trust Management -->
+    <section id="Mandal" class="section container">
+      <h2 class="section-title text-center">Jhulasan Kelvani Mandal</h2>
+      <div class="grid-layout grid-2 mobile-col-2 mt-20" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+        <div class="card text-center profile-card">
+          <img src="Images/db patel.jpeg" alt="Dineshbhai Patel" class="avatar">
+          <h3 class="profile-name">Dineshbhai Patel</h3>
+          <p class="profile-role">President</p>
+        </div>
+        <div class="card text-center profile-card">
+          <img src="Images/ashokkumar.png" alt="Ashokkumar Patel" class="avatar">
+          <h3 class="profile-name">Ashokkumar Patel</h3>
+          <p class="profile-role">Secretary</p>
+        </div>
+      </div>
+      <div class="trustee-trigger-box interactive-card text-center" onclick="window.open('trustees/trustees.html', '_blank')">
+  <h3>📋 Click Here to View All Trustees Details</h3>
+</div>
+    </section>
+
     <!-- Faculty -->
     <section id="faculty" class="section container">
       <h2 class="section-title text-center">Faculty & Staff</h2>
-      <div class="grid-layout grid-3 mt-20">
-        <div class="card text-center profile-card">
-          <img src="Images/Principal.png" alt="Ambalal Prajapati" class="avatar">
-          <h3 class="profile-name">Ambalal Prajapati</h3>
-          <p class="profile-role">Principal</p>
+      <p class="text-center" style="color: var(--text-muted);">Click on any faculty card to view professional credentials and roles.</p>
+      <div class="grid-layout grid-3 mobile-col-3 mt-20">
+        
+        <!-- Faculty Card 1 -->
+        <div class="profile-card-container" onclick="flipCard(this)">
+          <div class="profile-card-flipper">
+            <div class="card text-center profile-card card-front">
+              <img src="Images/Principal.png" alt="Ambalal Prajapati" class="avatar">
+              <h3 class="profile-name">Ambalal Prajapati</h3>
+              <p class="profile-role">Principal</p>
+              <span class="flip-hint">👆 Click to view details</span>
+            </div>
+            <div class="card profile-card card-back">
+              <h3 class="profile-name">Ambalal Prajapati</h3>
+              <p class="profile-role">Principal</p>
+              <p><strong>Education:</strong> M.Sc., B.Ed.</p>
+              <p><strong>Role:</strong> Administration & Mathematics</p>
+            </div>
+          </div>
         </div>
-        <div class="card text-center profile-card">
-          <img src="Images/Principal.png" alt="Shambhubhai Rabari" class="avatar">
-          <h3 class="profile-name">Shambhubhai Rabari</h3>
-          <p class="profile-role">Teacher</p>
+
+        <!-- Faculty Card 2 -->
+        <div class="profile-card-container" onclick="flipCard(this)">
+          <div class="profile-card-flipper">
+            <div class="card text-center profile-card card-front">
+              <img src="Images/aditya.jpg" alt="Aditya Raval" class="avatar">
+              <h3 class="profile-name">Aditya Raval</h3>
+              <p class="profile-role">Teacher</p>
+              <span class="flip-hint">👆 Click to view details</span>
+            </div>
+            <div class="card profile-card card-back">
+              <h3 class="profile-name">Aditya Raval</h3>
+              <p class="profile-role">Teacher</p>
+              <p><strong>Education:</strong> B.Sc., B.Ed.</p>
+              <p><strong>Role:</strong> Science Teacher</p>
+            </div>
+          </div>
         </div>
-        <div class="card text-center profile-card">
-          <img src="Images/Principal.png" alt="Aditya Raval" class="avatar">
-          <h3 class="profile-name">Aditya Raval</h3>
-          <p class="profile-role">Teacher</p>
+
+        <!-- Faculty Card 3 -->
+        <div class="profile-card-container" onclick="flipCard(this)">
+          <div class="profile-card-flipper">
+            <div class="card text-center profile-card card-front">
+              <img src="Images/hinaben.jpg" alt="Heenaben Agravat" class="avatar">
+              <h3 class="profile-name">Heenaben Agravat</h3>
+              <p class="profile-role">Teacher</p>
+              <span class="flip-hint">👆 Click to view details</span>
+            </div>
+            <div class="card profile-card card-back">
+              <h3 class="profile-name">Heenaben Agravat</h3>
+              <p class="profile-role">Teacher</p>
+              <p><strong>Education:</strong> M.A., B.Ed.</p>
+              <p><strong>Role:</strong> Languages Teacher</p>
+            </div>
+          </div>
         </div>
+
+        <!-- Faculty Card 4 -->
+        <div class="profile-card-container" onclick="flipCard(this)">
+          <div class="profile-card-flipper">
+            <div class="card text-center profile-card card-front">
+              <img src="Images/dimpalben.jpg" alt="Dimpalbahen Suthar" class="avatar">
+              <h3 class="profile-name">Dimpalbahen Suthar</h3>
+              <p class="profile-role">Teacher</p>
+              <span class="flip-hint">👆 Click to view details</span>
+            </div>
+            <div class="card profile-card card-back">
+              <h3 class="profile-name">Dimpalbahen Suthar</h3>
+              <p class="profile-role">Teacher</p>
+              <p><strong>Education:</strong> B.A., B.Ed.</p>
+              <p><strong>Role:</strong> Social Science Teacher</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Faculty Card 5 -->
+        <div class="profile-card-container" onclick="flipCard(this)">
+          <div class="profile-card-flipper">
+            <div class="card text-center profile-card card-front">
+              <img src="Images/meghanaben.jpg" alt="Meghna Patel" class="avatar">
+              <h3 class="profile-name">Meghna Patel</h3>
+              <p class="profile-role">Teacher</p>
+              <span class="flip-hint">👆 Click to view details</span>
+            </div>
+            <div class="card profile-card card-back">
+              <h3 class="profile-name">Meghna Patel</h3>
+              <p class="profile-role">Teacher</p>
+              <p><strong>Education:</strong> B.Com., B.Ed.</p>
+              <p><strong>Role:</strong> Commerce Teacher</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Faculty Card 6 -->
+        <div class="profile-card-container" onclick="flipCard(this)">
+          <div class="profile-card-flipper">
+            <div class="card text-center profile-card card-front">
+              <img src="Images/jigishaben.jpg" alt="Jigishaben Parmar" class="avatar">
+              <h3 class="profile-name">Jigishaben Parmar</h3>
+              <p class="profile-role">Teacher</p>
+              <span class="flip-hint">👆 Click to view details</span>
+            </div>
+            <div class="card profile-card card-back">
+              <h3 class="profile-name">Jigishaben Parmar</h3>
+              <p class="profile-role">Teacher</p>
+              <p><strong>Education:</strong> B.Sc., B.Ed.</p>
+              <p><strong>Role:</strong> Mathematics & Science Teacher</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Faculty Card 7 -->
+        <div class="profile-card-container" onclick="flipCard(this)">
+          <div class="profile-card-flipper">
+            <div class="card text-center profile-card card-front">
+              <img src="Images/gayatriben.jpg" alt="Gayatriben Dodiya" class="avatar">
+              <h3 class="profile-name">Gayatriben Dodiya</h3>
+              <p class="profile-role">Teacher</p>
+              <span class="flip-hint">👆 Click to view details</span>
+            </div>
+            <div class="card profile-card card-back">
+              <h3 class="profile-name">Gayatriben Dodiya</h3>
+              <p class="profile-role">Teacher</p>
+              <p><strong>Education:</strong> B.A., B.Ed.</p>
+              <p><strong>Role:</strong> Teacher</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Faculty Card 8 -->
+        <div class="profile-card-container" onclick="flipCard(this)">
+          <div class="profile-card-flipper">
+            <div class="card text-center profile-card card-front">
+              <img src="Images/RANJITSINH.jpg" alt="Ranjitsinh Zala" class="avatar">
+              <h3 class="profile-name">Ranjitsinh Zala</h3>
+              <p class="profile-role">Clerk</p>
+              <span class="flip-hint">👆 Click to view details</span>
+            </div>
+            <div class="card profile-card card-back">
+              <h3 class="profile-name">Ranjitsinh Zala</h3>
+              <p class="profile-role">Clerk</p>
+              <p><strong>Education:</strong> B.Com.</p>
+              <p><strong>Role:</strong> Administrative Clerk</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Faculty Card 9 -->
+        <div class="profile-card-container" onclick="flipCard(this)">
+          <div class="profile-card-flipper">
+            <div class="card text-center profile-card card-front">
+              <img src="Images/SHAILESHBHAI.jpg" alt="Shaileshbhai Patel" class="avatar">
+              <h3 class="profile-name">Shaileshbhai Patel</h3>
+              <p class="profile-role">Peon</p>
+              <span class="flip-hint">👆 Click to view details</span>
+            </div>
+            <div class="card profile-card card-back">
+              <h3 class="profile-name">Shaileshbhai Patel</h3>
+              <p class="profile-role">Peon</p>
+              <p><strong>Education:</strong> Higher Secondary</p>
+              <p><strong>Role:</strong> Support Staff</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
-<!-- Extra Curricular Activities -->
+    <!-- Extra Curricular Activities -->
     <section id="eca" class="section container">
       <h2 class="section-title text-center">Extra Curricular Activities</h2>
-      <div class="grid-layout grid-gallery mt-20">
-        <!-- Video/Multi-photo Event -->
+      <div class="grid-layout grid-gallery mobile-col-2 mt-20">
         <div class="gallery-item interactive-card" onclick="openEventGallery('independenceDay')">
           <div class="uniform-media-box">
             <img src="Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.20.15 PM (1).jpeg" alt="Independence Day">
           </div>
           <div class="gallery-caption">Independence Day Celebration</div>
         </div>
-        <!-- Single Photos -->
         <div class="gallery-item interactive-card" onclick="openLightbox(this.querySelector('.uniform-media-box img'))">
           <div class="uniform-media-box">
             <img src="Images/Purna_Chess_Winner.jpg" alt="SGFI U-19 Chess Winner">
@@ -163,41 +334,43 @@
     <!-- Committees -->
     <section id="committees" class="section container">
       <h2 class="section-title text-center">સમિતિઓ (Committees)</h2>
-      <div class="grid-layout grid-4 mt-20">
-        <a href="committees/prarthna.html" class="btn btn-primary interactive-card">🙏 પ્રાર્થના સમિતિ</a>
-        <a href="committees/aarogya.html" class="btn btn-primary interactive-card">🏥 આરોગ્ય સમિતિ</a>
-        <a href="committees/shist.html" class="btn btn-primary interactive-card">⚖️ શિસ્ત સમિતિ</a>
-        <a href="committees/paryavaran.html" class="btn btn-primary interactive-card">🌱 પર્યાવરણ સમિતિ</a>
-        <a href="committees/maths-science.html" class="btn btn-primary interactive-card">🔬 ગણિત-વિજ્ઞાન સમિતિ</a>
-        <a href="committees/pustkalay.html" class="btn btn-primary interactive-card">📚 પુસ્તકાલય સમિતિ</a>
-        <a href="committees/pravas.html" class="btn btn-primary interactive-card">🚌 પ્રવાસ સમિતિ</a>
-        <a href="committees/cultural.html" class="btn btn-primary interactive-card">🎭 સાંસ્કૃતિક સમિતિ</a>
+      <div class="grid-layout grid-4 mobile-col-3 mt-20">
+        <a href="committees/prarthna.html" target="_blank" class="btn btn-primary interactive-card">🙏 પ્રાર્થના સમિતિ</a>
+        <a href="committees/aarogya.html" target="_blank" class="btn btn-primary interactive-card">🏥 આરોગ્ય સમિતિ</a>
+        <a href="committees/shist.html" target="_blank" class="btn btn-primary interactive-card">⚖️ શિસ્ત સમિતિ</a>
+        <a href="committees/safai.html" target="_blank" class="btn btn-primary interactive-card">🧹 સફાઈ સમિતિ</a>
+        <a href="committees/paryavaran.html" target="_blank" class="btn btn-primary interactive-card">🌱 પર્યાવરણ સમિતિ</a>
+        <a href="committees/maths-science.html" target="_blank" class="btn btn-primary interactive-card">🔬 ગણિત-વિજ્ઞાન સમિતિ</a>
+        <a href="committees/pustkalay.html" target="_blank" class="btn btn-primary interactive-card">📚 પુસ્તકાલય સમિતિ</a>
+        <a href="committees/pravas.html" target="_blank" class="btn btn-primary interactive-card">🚌 પ્રવાસ સમિતિ</a>
+        <a href="committees/cultural.html" target="_blank" class="btn btn-primary interactive-card">🎭 સાંસ્કૃતિક સમિતિ</a>
+        <a href="committees/buletin-board.html" target="_blank" class="btn btn-primary interactive-card">📌 બુલેટિન બોર્ડ સમિતિ</a>
+        <a href="committees/sports.html" target="_blank" class="btn btn-primary interactive-card">🏆 રમત ગમત સમિતિ</a>
       </div>
     </section>
 
     <!-- Result -->
     <section id="result" class="section container">
       <h2 class="section-title text-center">Results</h2>
-      <div class="grid-layout grid-3 mt-20">
-        <!-- <a href="Result/login.html" class="card interactive-card flex-center"><h3>First Exam Result Login</h3></a> -->
-        <a href="Result/fe.html" class="card interactive-card flex-center"><h3>First Exam Result</h3></a>
-        <a href="Result/404.html" class="card interactive-card flex-center"><h3>Second Exam Result</h3></a>
-        <a href="Result/404.html" class="card interactive-card flex-center"><h3>Annual Exam Result</h3></a>
+      <div class="grid-layout grid-3 mobile-col-3 mt-20">
+        <a href="Result/fe.html" target="_blank" class="card interactive-card flex-center"><h3>First Exam Result</h3></a>
+        <a href="Result/404.html" target="_blank" class="card interactive-card flex-center"><h3>Second Exam Result</h3></a>
+        <a href="Result/404.html" target="_blank" class="card interactive-card flex-center"><h3>Annual Exam Result</h3></a>
       </div>
     </section>
 
     <!-- Contact -->
     <section id="contact" class="section container">
       <h2 class="section-title text-center">Contact Us</h2>
-      <div class="card mt-20">
-        <div class="grid-layout grid-2">
+      <div class="card mt-20" style="background: linear-gradient(to bottom right, #ffffff, #f0fdfa);">
+        <div class="grid-layout grid-2 mobile-col-1">
           <div class="contact-info flex-column">
-            <p><strong>📞 Phone:</strong> <br>+91 9725643008</p>
-            <p><strong>✉️ Email:</strong> <br>cpgajjarhighschool@gmail.com</p>
-            <p><strong>📍 Address:</strong> <br>Jhulasan, Kadi, Mehsana, Gujarat</p>
+            <p><strong>📞 Phone:</strong> <a href="tel:+919725643008" style="color: var(--primary-color); text-decoration: none;">+91 9725643008</a></p>
+            <p><strong>✉️ Email:</strong> <br><span style="color: var(--text-muted);">cpgajjarhighschool@gmail.com</span></p>
+            <p><strong>📍 Address:</strong> <br><span style="color: var(--text-muted);">Jhulasan, Kadi, Mehsana, Gujarat</span></p>
           </div>
           <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3663.7353244658207!2d72.47059507510149!3d23.32535997896269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c252a828337e9%3A0x98d7819e5b96ecc4!2sC%20P%20High%20School!5e0!3m2!1sen!2sus!4v1757315272878!5m2!1sen!2sus" width="100%" height="250" style="border:0; border-radius:8px;" allowfullscreen></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3663.7353244658207!2d72.47059507510149!3d23.32535997896269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c252a828337e9%3A0x98d7819e5b96ecc4!2sC%20P%20High%20School!5e0!3m2!1sen!2sus!4v1757315272878!5m2!1sen!2sus" width="100%" height="250" style="border:0; border-radius:12px; box-shadow: var(--shadow-sm);" allowfullscreen></iframe>
           </div>
         </div>
       </div>
@@ -207,26 +380,42 @@
 
   <!-- Universal Footer -->
   <footer class="site-footer">
-    <div class="container text-center">
-      <p>© 2026 Shree C. P. Gajjar Highschool, Jhulasan. All Rights Reserved.</p>
+    <div class="container text-center" style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+      <p style="font-size: 1.05rem;">શ્રી સી.પી.ગજ્જર હાઈસ્કૂલ, ઝુલાસણ</p>
+      <p style="font-size: 0.85rem; opacity: 0.8;">© 2026 All Rights Reserved • Designed with dedication for rural education excellence.</p>
     </div>
   </footer>
 
-  <!-- Modals (Hidden by default) -->
-  <!-- Event Gallery Modal -->
+  <!-- Modals -->
   <div id="eventModal" class="modal-overlay">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeEventGallery()">&times;</span>
+      <span class="close-btn" onclick="closeEventGallery()">×</span>
       <h2 id="modalEventTitle" class="section-title">Event Photos</h2>
       <div id="modalPhotoGrid" class="grid-layout grid-gallery mt-20"></div>
     </div>
   </div>
 
-  <!-- Image Lightbox -->
-  <div id="lightbox" class="modal-overlay" onclick="if(event.target.id==='lightbox') closeLightbox()">
-    <span class="close-btn" onclick="closeLightbox()">&times;</span>
+  <div id="lightbox" class="modal-overlay">
+    <span class="close-btn" onclick="closeLightbox()">×</span>
     <img id="lightbox-img" src="" alt="Expanded Image">
     <div id="lightbox-caption"></div>
+  </div>
+  
+  <a href="https://wa.me/919725643008?text=નમસ્તે,%20મને%20શાળા વિશે%20માહિતીની%20જરૂર%20છે." class="whatsapp-float" target="_blank" title="WhatsApp પર સંપર્ક કરો">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.558 6.558 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.347.1-.1.133-.168.198-.28.065-.112.032-.21-.016-.298-.049-.088-.445-1.076-.61-1.47-.16-.389-.323-.335-.445-.34l-.38-.007c-.133 0-.348.048-.53.247-.182.198-.694.678-.694 1.654 0 .976.71 1.916.808 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.078.38-.058 1.17-.48 1.338-.943.168-.463.168-.86.118-.943-.05-.084-.184-.133-.382-.232"/>
+    </svg>
+  </a>
+
+  <!-- Trustee Details Modal -->
+  <div id="trusteeModal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeTrusteeModal()">×</span>
+      <h2 class="section-title text-center">Trustee Committee Details</h2>
+      <div class="mt-20 text-center">
+        <img src="Images/Karobari Sabhy.jpeg" alt="Trustee Details" style="max-width: 100%; border-radius: 12px; box-shadow: var(--shadow-sm);">
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>

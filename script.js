@@ -1,46 +1,60 @@
 document.addEventListener("DOMContentLoaded", () => {
-  
-  // 1. Mobile Menu Toggle
+  // 1. Mobile Menu Toggle & Hamburger Animation
   const mobileBtn = document.getElementById("mobileMenuBtn");
   const navLinks = document.querySelector(".nav-links");
   
   if (mobileBtn && navLinks) {
     mobileBtn.addEventListener("click", () => {
       navLinks.classList.toggle("active");
+      
+      // Toggle hamburger lines appearance if desired
+      const spans = mobileBtn.querySelectorAll("span");
+      if (navLinks.classList.contains("active")) {
+        spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+        spans[1].style.opacity = "0";
+        spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
+      } else {
+        spans[0].style.transform = "none";
+        spans[1].style.opacity = "1";
+        spans[2].style.transform = "none";
+      }
     });
   }
 
-  // 2. Smooth Scrolling for Anchor Links
+  // 2. Smooth Scrolling for Anchor Links & Auto-close mobile drawer
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
-      
-      // Only scroll if the link is a standard anchor (not just "#")
       if (targetId !== "#") {
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
           e.preventDefault();
           targetElement.scrollIntoView({ behavior: 'smooth' });
-          // Close mobile menu if open
-          if (navLinks) navLinks.classList.remove("active");
+          if (navLinks && navLinks.classList.contains("active")) {
+            navLinks.classList.remove("active");
+            // Reset hamburger icon
+            const spans = mobileBtn.querySelectorAll("span");
+            spans[0].style.transform = "none";
+            spans[1].style.opacity = "1";
+            spans[2].style.transform = "none";
+          }
         }
       }
     });
   });
-
 });
 
-// 3. Event Gallery & Database
+// 3. Event Gallery Database & Logic
 const eventPhotos = {
-    independenceDay: {
-        title: "Independence Day Celebration 2026",
-        photos: [
-            "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.20.15 PM.jpeg",
-            "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.20.15 PM (1).jpeg",
-            "Images/Independence Day Celebration/Video.mp4",
-            "https://www.youtube.com/embed/hA8MFZ76Jbc"
-        ]
-    }
+  independenceDay: {
+    title: "Independence Day Celebration 2026",
+    photos: [
+      "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.20.15 PM.jpeg",
+      "Images/Independence Day Celebration/WhatsApp Image 2026-08-15 at 4.20.15 PM (1).jpeg",
+      "Images/Independence Day Celebration/Video.mp4",
+      "https://www.youtube.com/embed/hA8MFZ76Jbc"
+    ]
+  }
 };
 
 function openEventGallery(eventId) {
@@ -48,7 +62,6 @@ function openEventGallery(eventId) {
   const titleElem = document.getElementById("modalEventTitle");
   const gridElem = document.getElementById("modalPhotoGrid");
 
-  // Safeguard: Ensure modal exists on current page
   if (!modal || !gridElem) return;
 
   const eventData = eventPhotos[eventId];
@@ -56,61 +69,52 @@ function openEventGallery(eventId) {
 
   titleElem.innerText = eventData.title;
   gridElem.innerHTML = ""; 
-
-  // Make modal visible FIRST (crucial for YouTube iframe initialization)
   modal.style.display = "flex";
+  history.pushState({ modalOpen: true }, ""); // Pushes history state so mobile back button closes the modal
 
-  // Inside openEventGallery function in script.js:
-eventData.photos.forEach(src => {
-    let wrapper, mediaElement;
+  eventData.photos.forEach(src => {
+    let wrapper = document.createElement("div");
+    wrapper.className = "uniform-media-box interactive-card";
 
     if (src.includes("youtube.com") || src.includes("youtu.be")) {
-        wrapper = document.createElement("div");
-        wrapper.className = "uniform-media-box interactive-card"; // Forces square size
-        
-        wrapper.innerHTML = `
-            <iframe 
-                src="${src}?autoplay=0&modestbranding=1" 
-                title="${eventData.title}" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen>
-            </iframe>
-        `;
-        gridElem.appendChild(wrapper);
-    } 
-    else if (src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".mov")) {
-        wrapper = document.createElement("div");
-        wrapper.className = "uniform-media-box interactive-card"; // Forces square size
-        
-        mediaElement = document.createElement("video");
-        mediaElement.src = src;
-        mediaElement.controls = true;
-        wrapper.appendChild(mediaElement);
-        gridElem.appendChild(wrapper);
-    } 
-    else {
-        wrapper = document.createElement("div");
-        wrapper.className = "uniform-media-box interactive-card"; // Forces square size
-        
-        mediaElement = document.createElement("img");
-        mediaElement.src = src;
-        mediaElement.alt = eventData.title;
-        mediaElement.onclick = function() {
-            openLightbox(mediaElement); 
-        };
-        wrapper.appendChild(mediaElement);
-        gridElem.appendChild(wrapper);
-    }
-});
-}
+      // Automatically convert watch links or short links to proper embed format to prevent playback errors
+      let embedSrc = src;
+      if (src.includes("watch?v=")) {
+        embedSrc = src.replace("watch?v=", "embed/");
+      } else if (src.includes("youtu.be/")) {
+        embedSrc = src.replace("youtu.be/", "www.youtube.com/embed/");
+      }
 
+      wrapper.innerHTML = `
+        <iframe 
+          src="${embedSrc}?autoplay=0&modestbranding=1" 
+          title="${eventData.title}" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      `;
+    } else if (src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".mov")) {
+      let videoElem = document.createElement("video");
+      videoElem.src = src;
+      videoElem.controls = true;
+      wrapper.appendChild(videoElem);
+    } else {
+      let imgElem = document.createElement("img");
+      imgElem.src = src;
+      imgElem.alt = eventData.title;
+      imgElem.onclick = () => openLightbox(imgElem);
+      wrapper.appendChild(imgElem);
+    }
+    
+    gridElem.appendChild(wrapper);
+  });
+}
 function closeEventGallery() {
   const modal = document.getElementById("eventModal");
   if (modal) {
-      modal.style.display = "none";
-      // Clear content to stop videos from playing in the background
-      document.getElementById("modalPhotoGrid").innerHTML = "";
+    modal.style.display = "none";
+    document.getElementById("modalPhotoGrid").innerHTML = "";
   }
 }
 
@@ -124,23 +128,49 @@ function openLightbox(imgElement) {
 
   lightboxImg.src = imgElement.src;
   caption.textContent = imgElement.alt || "";
-  
   lightbox.style.display = "flex";
+  history.pushState({ modalOpen: true }, ""); // Pushes state so back button closes modal
 }
 
 function closeLightbox() {
   const lightbox = document.getElementById("lightbox");
   if (lightbox) {
-      lightbox.style.display = "none";
-      document.getElementById("lightbox-img").src = "";
+    lightbox.style.display = "none";
+    document.getElementById("lightbox-img").src = "";
   }
 }
 
-// Close modals when clicking outside content area
+// 5. Trustee Modal Logic
+function openTrusteeModal() {
+  const modal = document.getElementById("trusteeModal");
+  if (modal) modal.style.display = "flex";
+  history.pushState({ modalOpen: true }, ""); // Pushes state so back button closes modal
+}
+
+function closeTrusteeModal() {
+  const modal = document.getElementById("trusteeModal");
+  if (modal) modal.style.display = "none";
+}
+
+// 6. Faculty Card Flip Logic
+function flipCard(container) {
+  container.classList.toggle("flipped");
+}
+
+// 7. Global Unified Modal Backdrop Closer
 window.onclick = function(event) {
   const eventModal = document.getElementById("eventModal");
   const lightbox = document.getElementById("lightbox");
+  const trusteeModal = document.getElementById("trusteeModal");
   
   if (event.target === eventModal) closeEventGallery();
   if (event.target === lightbox) closeLightbox();
+  if (event.target === trusteeModal) closeTrusteeModal();
 }
+
+// Handle phone/browser back button to close open modals instead of exiting site
+window.addEventListener('popstate', function(event) {
+  closeEventGallery();
+  closeLightbox();
+  closeTrusteeModal();
+});
