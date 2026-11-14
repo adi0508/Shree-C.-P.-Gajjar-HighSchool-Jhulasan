@@ -1,25 +1,51 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 1. Mobile Menu Toggle & Hamburger Animation
   const mobileBtn = document.getElementById("mobileMenuBtn");
+  const mobileCloseBtn = document.getElementById("mobileCloseBtn");
   const navLinks = document.querySelector(".nav-links");
   
+  function toggleMobileMenu() {
+    navLinks.classList.toggle("active");
+    
+    const spans = mobileBtn.querySelectorAll("span");
+    if (navLinks.classList.contains("active")) {
+      spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+      spans[1].style.opacity = "0";
+      spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
+      document.body.style.overflow = "hidden"; // Prevent background scrolling
+    } else {
+      spans[0].style.transform = "none";
+      spans[1].style.opacity = "1";
+      spans[2].style.transform = "none";
+      document.body.style.overflow = "auto";
+    }
+  }
+
   if (mobileBtn && navLinks) {
-    mobileBtn.addEventListener("click", () => {
-      navLinks.classList.toggle("active");
-      
-      // Toggle hamburger lines appearance if desired
-      const spans = mobileBtn.querySelectorAll("span");
-      if (navLinks.classList.contains("active")) {
-        spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
-        spans[1].style.opacity = "0";
-        spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
-      } else {
-        spans[0].style.transform = "none";
-        spans[1].style.opacity = "1";
-        spans[2].style.transform = "none";
+    mobileBtn.addEventListener("click", toggleMobileMenu);
+  }
+
+  if (mobileCloseBtn && navLinks) {
+    mobileCloseBtn.addEventListener("click", toggleMobileMenu);
+  }
+
+  // 2. Smooth Scrolling for Anchor Links & Auto-close mobile drawer
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId !== "#") {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+          if (navLinks && navLinks.classList.contains("active")) {
+            toggleMobileMenu();
+          }
+        }
       }
     });
-  }
+  });
+});
 
   // 2. Smooth Scrolling for Anchor Links & Auto-close mobile drawer
   document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -42,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-});
 
 // 3. Event Gallery Database & Logic
 const eventPhotos = {

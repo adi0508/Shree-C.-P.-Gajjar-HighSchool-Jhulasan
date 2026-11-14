@@ -1203,26 +1203,57 @@ body {
     height: 100vh;
     background: #0f172a;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Changed to flex-start so content flows nicely with padding */
     align-items: center;
-    gap: 12px;
-    padding: 40px 20px;
+    gap: 10px;
+    padding: 70px 20px 40px 20px; /* Top padding leaves space for close button */
     z-index: 1001;
+    overflow-y: auto; /* Allows scrolling if screen is too short */
   }
 
   .nav-links.active {
     display: flex;
   }
 
+  /* Mobile Menu Close Button Styling */
+  .mobile-close-btn {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 1002;
+    transition: var(--transition);
+  }
+
+  .mobile-close-btn:hover {
+    color: var(--primary-color);
+  }
+
+  .nav-links li {
+    width: 100%;
+    flex: unset; /* Prevents flex squishing */
+  }
+
   .nav-links a {
-    font-size: 1.1rem;
-    padding: 10px 20px;
-    width: 82%;
+    font-size: 1.05rem;
+    padding: 12px 16px;
+    width: 100%;
     text-align: center;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    white-space: normal; /* Allows Gujarati text to wrap properly if needed */
   }
 
   .nav-links a.nav-portal-btn {
     margin-left: 0;
+    background: #f59e0b;
+    color: #0f172a;
   }
 
   .hero-title {
