@@ -1,73 +1,84 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Mobile Menu Toggle & Hamburger Animation
+  // 1. Mobile Menu Toggle & Hamburger-to-X Animation
   const mobileBtn = document.getElementById("mobileMenuBtn");
-  const mobileCloseBtn = document.getElementById("mobileCloseBtn");
-  const navLinks = document.querySelector(".nav-links");
-  
-  function toggleMobileMenu() {
-    navLinks.classList.toggle("active");
-    
-    const spans = mobileBtn.querySelectorAll("span");
-    if (navLinks.classList.contains("active")) {
-      spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
-      spans[1].style.opacity = "0";
-      spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
-      document.body.style.overflow = "hidden"; // Prevent background scrolling
+  const navLinks = document.getElementById("navLinks");
+  const siteHeader = document.querySelector(".site-header");
+  const tickerBar = document.querySelector(".top-announcement-bar");
+
+  // Dynamically align mobile menu right below the ticker + header on any screen height
+  function adjustMobileMenuOffset() {
+    if (!navLinks) return;
+    if (window.innerWidth <= 768) {
+      const tickerHeight = tickerBar ? tickerBar.offsetHeight : 0;
+      const headerHeight = siteHeader ? siteHeader.offsetHeight : 0;
+      const totalTop = tickerHeight + headerHeight;
+
+      if (siteHeader) siteHeader.style.top = `${tickerHeight}px`;
+      navLinks.style.top = `${totalTop}px`;
+      navLinks.style.height = `calc(100vh - ${totalTop}px)`;
     } else {
-      spans[0].style.transform = "none";
-      spans[1].style.opacity = "1";
-      spans[2].style.transform = "none";
-      document.body.style.overflow = "auto";
+      navLinks.style.top = "";
+      navLinks.style.height = "";
     }
   }
 
+  function closeMobileMenu() {
+    if (!navLinks || !mobileBtn) return;
+    navLinks.classList.remove("active");
+    mobileBtn.classList.remove("open");
+    mobileBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
+  function openMobileMenu() {
+    if (!navLinks || !mobileBtn) return;
+    adjustMobileMenuOffset();
+    navLinks.classList.add("active");
+    mobileBtn.classList.add("open");
+    mobileBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  }
+
+  adjustMobileMenuOffset();
+  window.addEventListener("resize", () => {
+    adjustMobileMenuOffset();
+    if (window.innerWidth > 768 && navLinks && navLinks.classList.contains("active")) {
+      closeMobileMenu();
+    }
+  });
+
   if (mobileBtn && navLinks) {
-    mobileBtn.addEventListener("click", toggleMobileMenu);
+    mobileBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (navLinks.classList.contains("active")) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
   }
 
-  if (mobileCloseBtn && navLinks) {
-    mobileCloseBtn.addEventListener("click", toggleMobileMenu);
-  }
-
-  // 2. Smooth Scrolling for Anchor Links & Auto-close mobile drawer
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId !== "#") {
+  // 2. Smooth Scrolling for Anchor Links & Auto-close Mobile Drawer
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", function (e) {
+      const targetId = this.getAttribute("href");
+      if (targetId && targetId !== "#") {
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
           e.preventDefault();
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-          if (navLinks && navLinks.classList.contains("active")) {
-            toggleMobileMenu();
-          }
+          closeMobileMenu();
+          targetElement.scrollIntoView({ behavior: "smooth" });
         }
       }
     });
   });
+
+  // Also close mobile menu if external portal link is clicked
+  const portalLink = document.querySelector(".nav-portal-btn");
+  if (portalLink) {
+    portalLink.addEventListener("click", closeMobileMenu);
+  }
 });
-
-  // 2. Smooth Scrolling for Anchor Links & Auto-close mobile drawer
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId !== "#") {
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          e.preventDefault();
-          targetElement.scrollIntoView({ behavior: 'smooth' });
-          if (navLinks && navLinks.classList.contains("active")) {
-            navLinks.classList.remove("active");
-            // Reset hamburger icon
-            const spans = mobileBtn.querySelectorAll("span");
-            spans[0].style.transform = "none";
-            spans[1].style.opacity = "1";
-            spans[2].style.transform = "none";
-          }
-        }
-      }
-    });
-  });
 
 // 3. Event Gallery Database & Logic
 const eventPhotos = {
@@ -93,16 +104,15 @@ function openEventGallery(eventId) {
   if (!eventData) return;
 
   titleElem.innerText = eventData.title;
-  gridElem.innerHTML = ""; 
+  gridElem.innerHTML = "";
   modal.style.display = "flex";
-  history.pushState({ modalOpen: true }, ""); // Pushes history state so mobile back button closes the modal
+  history.pushState({ modalOpen: true }, "");
 
-  eventData.photos.forEach(src => {
-    let wrapper = document.createElement("div");
+  eventData.photos.forEach((src) => {
+    const wrapper = document.createElement("div");
     wrapper.className = "uniform-media-box interactive-card";
 
     if (src.includes("youtube.com") || src.includes("youtu.be")) {
-      // Automatically convert watch links or short links to proper embed format to prevent playback errors
       let embedSrc = src;
       if (src.includes("watch?v=")) {
         embedSrc = src.replace("watch?v=", "embed/");
@@ -120,26 +130,28 @@ function openEventGallery(eventId) {
         </iframe>
       `;
     } else if (src.endsWith(".mp4") || src.endsWith(".webm") || src.endsWith(".mov")) {
-      let videoElem = document.createElement("video");
+      const videoElem = document.createElement("video");
       videoElem.src = src;
       videoElem.controls = true;
       wrapper.appendChild(videoElem);
     } else {
-      let imgElem = document.createElement("img");
+      const imgElem = document.createElement("img");
       imgElem.src = src;
       imgElem.alt = eventData.title;
       imgElem.onclick = () => openLightbox(imgElem);
       wrapper.appendChild(imgElem);
     }
-    
+
     gridElem.appendChild(wrapper);
   });
 }
+
 function closeEventGallery() {
   const modal = document.getElementById("eventModal");
+  const gridElem = document.getElementById("modalPhotoGrid");
   if (modal) {
     modal.style.display = "none";
-    document.getElementById("modalPhotoGrid").innerHTML = "";
+    if (gridElem) gridElem.innerHTML = "";
   }
 }
 
@@ -149,27 +161,30 @@ function openLightbox(imgElement) {
   const lightboxImg = document.getElementById("lightbox-img");
   const caption = document.getElementById("lightbox-caption");
 
-  if (!lightbox) return;
+  if (!lightbox || !lightboxImg) return;
 
   lightboxImg.src = imgElement.src;
-  caption.textContent = imgElement.alt || "";
+  if (caption) caption.textContent = imgElement.alt || "";
   lightbox.style.display = "flex";
-  history.pushState({ modalOpen: true }, ""); // Pushes state so back button closes modal
+  history.pushState({ modalOpen: true }, "");
 }
 
 function closeLightbox() {
   const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
   if (lightbox) {
     lightbox.style.display = "none";
-    document.getElementById("lightbox-img").src = "";
+    if (lightboxImg) lightboxImg.src = "";
   }
 }
 
 // 5. Trustee Modal Logic
 function openTrusteeModal() {
   const modal = document.getElementById("trusteeModal");
-  if (modal) modal.style.display = "flex";
-  history.pushState({ modalOpen: true }, ""); // Pushes state so back button closes modal
+  if (modal) {
+    modal.style.display = "flex";
+    history.pushState({ modalOpen: true }, "");
+  }
 }
 
 function closeTrusteeModal() {
@@ -183,18 +198,18 @@ function flipCard(container) {
 }
 
 // 7. Global Unified Modal Backdrop Closer
-window.onclick = function(event) {
+window.addEventListener("click", (event) => {
   const eventModal = document.getElementById("eventModal");
   const lightbox = document.getElementById("lightbox");
   const trusteeModal = document.getElementById("trusteeModal");
-  
+
   if (event.target === eventModal) closeEventGallery();
   if (event.target === lightbox) closeLightbox();
   if (event.target === trusteeModal) closeTrusteeModal();
-}
+});
 
-// Handle phone/browser back button to close open modals instead of exiting site
-window.addEventListener('popstate', function(event) {
+// Handle phone/browser back button to close open modals
+window.addEventListener("popstate", () => {
   closeEventGallery();
   closeLightbox();
   closeTrusteeModal();
